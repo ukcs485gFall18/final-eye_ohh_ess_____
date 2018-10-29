@@ -132,9 +132,9 @@ class ViewController: UIViewController {
             guard let hitTestResult = hitTestResults.first else { return }
             let translation = hitTestResult.worldTransform.translation
             
-            guard let shipScene = SCNScene(named: "ship.scn"),
-                let shipNode = shipScene.rootNode.childNode(withName: "ship", recursively: false)
-                else { return }
+            guard let shipScene = SCNScene(named: "art.scnassets/cube-sphere.scn") else { fatalError() }
+               guard let shipNode = shipScene.rootNode.childNode(withName: "cube-sphere", recursively: false)
+                else { fatalError() }
             
             shipNode.position = SCNVector3(x: translation.x, y: translation.y, z: translation.z)
             sceneView.scene.rootNode.addChildNode(shipNode)

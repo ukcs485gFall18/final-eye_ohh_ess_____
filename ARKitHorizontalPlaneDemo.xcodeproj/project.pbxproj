@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		615F0E0F2187AFC500D715EE /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 615F0E0E2187AFC500D715EE /* art.scnassets */; };
 		618DDF022187975200CFE2B8 /* CheckWinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618DDEFF2187975200CFE2B8 /* CheckWinner.swift */; };
 		618DDF032187975200CFE2B8 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618DDF002187975200CFE2B8 /* Cell.swift */; };
 		618DDF042187975200CFE2B8 /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618DDF012187975200CFE2B8 /* Cube.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		615F0E0E2187AFC500D715EE /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		618DDEFF2187975200CFE2B8 /* CheckWinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckWinner.swift; sourceTree = "<group>"; };
 		618DDF002187975200CFE2B8 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		618DDF012187975200CFE2B8 /* Cube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 		638A9CEC1FBA0605001D52ED /* ARKitHorizontalPlaneDemo */ = {
 			isa = PBXGroup;
 			children = (
+				615F0E0E2187AFC500D715EE /* art.scnassets */,
 				638A9CFF1FBA0650001D52ED /* 3D Objects */,
 				638A9CED1FBA0605001D52ED /* AppDelegate.swift */,
 				638A9CEF1FBA0605001D52ED /* ViewController.swift */,
@@ -150,6 +153,7 @@
 				638A9D031FBA065D001D52ED /* ship.png in Resources */,
 				638A9CF51FBA0605001D52ED /* Assets.xcassets in Resources */,
 				638A9D021FBA065D001D52ED /* ship.scn in Resources */,
+				615F0E0F2187AFC500D715EE /* art.scnassets in Resources */,
 				638A9CF31FBA0605001D52ED /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -309,7 +313,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G2DJ3Q6TF8;
 				INFOPLIST_FILE = ARKitHorizontalPlaneDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARtest2.ARKitHorizontalPlaneDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -325,7 +329,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G2DJ3Q6TF8;
 				INFOPLIST_FILE = ARKitHorizontalPlaneDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARtest2.ARKitHorizontalPlaneDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
