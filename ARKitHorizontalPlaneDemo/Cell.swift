@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Cell {
+public class Cell {
     
     enum cellState {
         case sphere
@@ -19,6 +19,9 @@ class Cell {
     public var x, y, z: Int?      // stores the location of the cell
     
     public var state: cellState?  // is reset for generator and solver
+    
+    // touch/tap event listener
+    // linkage to actual 3D objects
     
     init(x: Int, y: Int, z:Int) {
         self.x = x
