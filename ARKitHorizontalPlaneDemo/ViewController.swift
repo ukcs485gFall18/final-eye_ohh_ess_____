@@ -13,7 +13,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var resetButton: UIButton!
-    
     @IBOutlet weak var rotationSlider: UISlider!
     
     
