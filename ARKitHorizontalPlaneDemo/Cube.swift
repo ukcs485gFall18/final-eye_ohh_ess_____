@@ -19,7 +19,6 @@ class Cube {
         
         self.cube = [[[Cell]]](repeating:[[Cell]](repeating:[Cell](repeating:defaultCell, count:3), count:3), count:3)
         
-
         fillCubeArray()
         
         // set object to preview outline cube

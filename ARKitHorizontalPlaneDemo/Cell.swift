@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class Cell {
+class Cell {
     
     enum cellState {
         case sphere
@@ -16,9 +16,9 @@ public class Cell {
         case empty
     }
     
-    public var x, y, z: Int?      // stores the location of the cell
+    var x, y, z: Int?      // stores the location of the cell
     
-    public var state: cellState?  // is reset for generator and solver
+    var state: cellState?  // is reset for generator and solver
     
     // touch/tap event listener
     // linkage to actual 3D objects
@@ -28,39 +28,40 @@ public class Cell {
         self.y = y
         self.z = z
         self.state = cellState.cross
+        
         // create empty cell 3D object
         
         // set cell location in space relative to 0,1,0
         
         // set preferred size
-
+        
     }
     
-    public func fillX() {
+    func fillX() {
         // replace the cell with the X 3D object
     }
     
-    public func prevX() {
+    func prevX() {
         // replace the cell with the X 3D object
     }
     
-    public func fillO() {
+    func fillO() {
         // replace the cell with the preview O 3D object
     }
     
-    public func prevO() {
+    func prevO() {
         // replace the cell with the preview X 3D object
     }
     
-    public func removeXO()   {
+    func removeXO()   {
         // remove object from the the cell
     }
 
-    public func removeCell()   {  // NOTE: this function might now be needed.
+    func removeCell()   {  // NOTE: this function might now be needed.
         // remove cell object from the scene
     }
     
-    public func rePlaceCell()   {
+    func rePlaceCell()   {
         // re position x, y, z placement during resize
     }
 }
