@@ -15,12 +15,20 @@ class ViewController: UIViewController {
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var rotationSlider: UISlider!
     
+    private var arDelegate = RootARDelegate()
+    private var gestureDelegate = RootGestureDelegate()
     
     var prevLocation = CGPoint(x: 0, y: 0)      // variable to capute prev location
     var shipObj: SCNNode!
     var shipPlaced: Bool = false {  // bool to lock only one ship in the scene
         didSet {
             sceneView.debugOptions = shipPlaced ? [] : [.showFeaturePoints] //Hide Feature points based on ships existence or not.
+        }
+    }
+    
+    var rootViewModel: RootViewModel? {
+        didSet{
+            setupViewModel(with: rootViewModel!)
         }
     }
     
@@ -58,9 +66,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addTapGestureToSceneView()
         configureLighting()
-        
+        addTapGestureToSceneView()
         addPinchGestureToSceneView()
     }
     
@@ -81,7 +88,7 @@ class ViewController: UIViewController {
         
         sceneView.session.run(configuration)
         
-        sceneView.delegate = self
+        sceneView.delegate = arDelegate
         sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
     }
     
@@ -99,14 +106,33 @@ class ViewController: UIViewController {
         let boxNode = SCNNode()
         boxNode.geometry = box
         boxNode.position = SCNVector3(x, y, z)
+        addNode(boxNode)
+    }
+    
+    
+    
+    
+    private func setupViewModel(with viewModel: RootViewModel) {
         
-        sceneView.scene.rootNode.addChildNode(boxNode)
+        setupPlacementNotification(with: viewModel)
+    
+    }
+    
+    private func setupPlacementNotification(with viewModel: RootViewModel) {
+        viewModel.notifyPlace = { [weak self] (node) in
+            self?.addNode(node)
+        }
+    }
+    
+    private func addNode(_ child: SCNNode) {
+        sceneView.scene.rootNode.addChildNode(child)
     }
     
     /*
      Author: Karthik
      This function is called when the tap gesture is activated
      */
+    
     @objc func addShipToSceneView(withGestureRecognizer recognizer: UIGestureRecognizer) {
 //        print("tap")
         let tapLocation = recognizer.location(in: sceneView)
@@ -137,7 +163,8 @@ class ViewController: UIViewController {
                 else { fatalError() }
             
             shipNode.position = SCNVector3(x: translation.x, y: translation.y, z: translation.z)
-            sceneView.scene.rootNode.addChildNode(shipNode)
+            //sceneView.scene.rootNode.addChildNode(shipNode)
+            addNode(shipNode)
             shipPlaced = true
             
             shipObj = shipNode
@@ -151,7 +178,7 @@ class ViewController: UIViewController {
     func addTapGestureToSceneView() {
         let tapGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(addShipToSceneView))
         tapGestureRecognizer.minimumPressDuration = 0
-        tapGestureRecognizer.delegate = self
+        tapGestureRecognizer.delegate = gestureDelegate
         sceneView.addGestureRecognizer(tapGestureRecognizer)
     }
     
@@ -161,16 +188,16 @@ class ViewController: UIViewController {
      This function is called when the pinch gesture is activated
      */
     @objc func pinchToZoom(_ gesture: UIPinchGestureRecognizer) {
-//        print("pinch")
-        guard let ship = shipObj else { return }
+
+        guard let ship = shipObj as? ShipNode else { return }
         if gesture.state == .began || gesture.state == .changed{
-            
-            let pinch = [Float(gesture.scale) * ship.scale.x,
-                         Float(gesture.scale) * ship.scale.y,
-                         Float(gesture.scale) * ship.scale.z]
-            ship.scale = SCNVector3Make(pinch[0], pinch[1], pinch[2])
-            gesture.scale = 1
+            ship.scale(with: Pinch(from: gesture))
+            reset(gesture)
         }
+    }
+    
+    private func reset(_ gesture: UIPinchGestureRecognizer) {
+        gesture.scale = Gesture.defaultScale
     }
     
     /* New Feature
@@ -179,84 +206,13 @@ class ViewController: UIViewController {
      */
     func addPinchGestureToSceneView() {
         let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinchToZoom))
-        pinchGestureRecognizer.delegate = self
+        pinchGestureRecognizer.delegate = gestureDelegate
         sceneView.addGestureRecognizer(pinchGestureRecognizer)
     }
     
-    
-    
-    
-}
-
-extension float4x4 {
-    var translation: float3 {
-        let translation = self.columns.3
-        return float3(translation.x, translation.y, translation.z)
-    }
-}
-
-extension UIColor {
-    open class var transparentLightBlue: UIColor {
-        return UIColor(red: 90/255, green: 200/255, blue: 250/255, alpha: 0.50)
-    }
-}
-
-extension ViewController: ARSCNViewDelegate {
-    
-    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        
-        // We safely unwrap the anchor argument as an ARPlaneAnchor to get information the flat surface at hand.
-        guard let planeAnchor = anchor as? ARPlaneAnchor, !shipPlaced else { return }
-        
-        // creating an SCNPlane to visualize the ARPlaneAnchor
-        let width = CGFloat(planeAnchor.extent.x)
-        let height = CGFloat(planeAnchor.extent.z)
-        let plane = SCNPlane(width: width, height: height)
-        
-        // assigning a color to our detected plane
-        plane.materials.first?.diffuse.contents = UIColor.transparentLightBlue
-        
-        // SCNNode with the SCNPlane geometry we just created.
-        let planeNode = SCNNode(geometry: plane)
-        
-        // getting a position for out plane to be places
-        let x = CGFloat(planeAnchor.center.x)
-        let y = CGFloat(planeAnchor.center.y)
-        let z = CGFloat(planeAnchor.center.z)
-        planeNode.position = SCNVector3(x,y,z)
-        planeNode.eulerAngles.x = -.pi / 2
-        
-        // adding the planeNode as the child node onto the newly added SceneKit node.
-        node.addChildNode(planeNode)
-    }
-    
-    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        // unwraping the anchor argument as ARPlaneAnchor, the node’s first child node, and the planeNode’s geometry as SCNPlane
-        guard let planeAnchor = anchor as?  ARPlaneAnchor,
-            let planeNode = node.childNodes.first,
-            let plane = planeNode.geometry as? SCNPlane
-            else { return }
-        
-        // we update the plane’s width and height using the planeAnchor extent’s x and z properties.
-        let width = CGFloat(planeAnchor.extent.x)
-        let height = CGFloat(planeAnchor.extent.z)
-        plane.width = width
-        plane.height = height
-        
-        // updatong the planeNode’s position
-        let x = CGFloat(planeAnchor.center.x)
-        let y = CGFloat(planeAnchor.center.y)
-        let z = CGFloat(planeAnchor.center.z)
-        planeNode.position = SCNVector3(x, y, z)
-    }
 }
 
 
-extension ViewController: UIGestureRecognizerDelegate {
-    //New Functionality
-    //Author: Yacob
-    //Delegate function Allows view to recognize multiple gestures simultaneously
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
-}
+
+
+

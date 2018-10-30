@@ -9,12 +9,12 @@
 import Foundation
 
 
-public class CheckWinner {
+class CheckWinner {
     
     // TEST VARIABLES
     var cube = [[[Cell]]]()
     
-    public func checkGameState() -> Bool {
+    func checkGameState() -> Bool {
         // given cell state and position check if the current player has won
         var flag = true
         
