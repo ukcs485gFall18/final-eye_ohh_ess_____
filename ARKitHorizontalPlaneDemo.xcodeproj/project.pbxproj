@@ -16,6 +16,7 @@
 		638A9CF31FBA0605001D52ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 638A9CF11FBA0605001D52ED /* Main.storyboard */; };
 		638A9CF51FBA0605001D52ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 638A9CF41FBA0605001D52ED /* Assets.xcassets */; };
 		638A9CF81FBA0605001D52ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 638A9CF61FBA0605001D52ED /* LaunchScreen.storyboard */; };
+		B34CF21F21881650009386A8 /* EasyAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34CF21E21881650009386A8 /* EasyAI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		638A9CF41FBA0605001D52ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		638A9CF71FBA0605001D52ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		638A9CF91FBA0605001D52ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B34CF21E21881650009386A8 /* EasyAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyAI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				618DDF002187975200CFE2B8 /* Cell.swift */,
 				618DDEFF2187975200CFE2B8 /* CheckWinner.swift */,
 				618DDF012187975200CFE2B8 /* Cube.swift */,
+				B34CF21E21881650009386A8 /* EasyAI.swift */,
 				638A9CF11FBA0605001D52ED /* Main.storyboard */,
 				638A9CF41FBA0605001D52ED /* Assets.xcassets */,
 				638A9CF61FBA0605001D52ED /* LaunchScreen.storyboard */,
@@ -162,6 +165,7 @@
 				618DDF022187975200CFE2B8 /* CheckWinner.swift in Sources */,
 				618DDF042187975200CFE2B8 /* Cube.swift in Sources */,
 				618DDF032187975200CFE2B8 /* Cell.swift in Sources */,
+				B34CF21F21881650009386A8 /* EasyAI.swift in Sources */,
 				638A9CF01FBA0605001D52ED /* ViewController.swift in Sources */,
 				638A9CEE1FBA0605001D52ED /* AppDelegate.swift in Sources */,
 			);
