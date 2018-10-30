@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		614A12DD2187B1910091421D /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 614A12DC2187B1910091421D /* art.scnassets */; };
 		618DDF022187975200CFE2B8 /* CheckWinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618DDEFF2187975200CFE2B8 /* CheckWinner.swift */; };
 		618DDF032187975200CFE2B8 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618DDF002187975200CFE2B8 /* Cell.swift */; };
 		618DDF042187975200CFE2B8 /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618DDF012187975200CFE2B8 /* Cube.swift */; };
@@ -15,11 +16,11 @@
 		638A9CF31FBA0605001D52ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 638A9CF11FBA0605001D52ED /* Main.storyboard */; };
 		638A9CF51FBA0605001D52ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 638A9CF41FBA0605001D52ED /* Assets.xcassets */; };
 		638A9CF81FBA0605001D52ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 638A9CF61FBA0605001D52ED /* LaunchScreen.storyboard */; };
-		638A9D021FBA065D001D52ED /* ship.scn in Resources */ = {isa = PBXBuildFile; fileRef = 638A9D001FBA065D001D52ED /* ship.scn */; };
-		638A9D031FBA065D001D52ED /* ship.png in Resources */ = {isa = PBXBuildFile; fileRef = 638A9D011FBA065D001D52ED /* ship.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		614A12DB2187B11F0091421D /* cube-sphere.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "cube-sphere.scn"; sourceTree = "<group>"; };
+		614A12DC2187B1910091421D /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		618DDEFF2187975200CFE2B8 /* CheckWinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckWinner.swift; sourceTree = "<group>"; };
 		618DDF002187975200CFE2B8 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		618DDF012187975200CFE2B8 /* Cube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
@@ -30,8 +31,6 @@
 		638A9CF41FBA0605001D52ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		638A9CF71FBA0605001D52ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		638A9CF91FBA0605001D52ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		638A9D001FBA065D001D52ED /* ship.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = ship.scn; sourceTree = "<group>"; };
-		638A9D011FBA065D001D52ED /* ship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ship.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +73,7 @@
 				638A9CF41FBA0605001D52ED /* Assets.xcassets */,
 				638A9CF61FBA0605001D52ED /* LaunchScreen.storyboard */,
 				638A9CF91FBA0605001D52ED /* Info.plist */,
+				614A12DC2187B1910091421D /* art.scnassets */,
 			);
 			path = ARKitHorizontalPlaneDemo;
 			sourceTree = "<group>";
@@ -81,8 +81,7 @@
 		638A9CFF1FBA0650001D52ED /* 3D Objects */ = {
 			isa = PBXGroup;
 			children = (
-				638A9D011FBA065D001D52ED /* ship.png */,
-				638A9D001FBA065D001D52ED /* ship.scn */,
+				614A12DB2187B11F0091421D /* cube-sphere.scn */,
 			);
 			path = "3D Objects";
 			sourceTree = "<group>";
@@ -147,9 +146,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				638A9CF81FBA0605001D52ED /* LaunchScreen.storyboard in Resources */,
-				638A9D031FBA065D001D52ED /* ship.png in Resources */,
+				614A12DD2187B1910091421D /* art.scnassets in Resources */,
 				638A9CF51FBA0605001D52ED /* Assets.xcassets in Resources */,
-				638A9D021FBA065D001D52ED /* ship.scn in Resources */,
 				638A9CF31FBA0605001D52ED /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -309,7 +307,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G2DJ3Q6TF8;
 				INFOPLIST_FILE = ARKitHorizontalPlaneDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARtest2.ARKitHorizontalPlaneDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -325,7 +323,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G2DJ3Q6TF8;
 				INFOPLIST_FILE = ARKitHorizontalPlaneDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ARtest2.ARKitHorizontalPlaneDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
