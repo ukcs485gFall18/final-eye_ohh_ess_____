@@ -124,55 +124,44 @@ class ViewController: UIViewController {
             addBox(x: translation.x, y: translation.y, z: translation.z)       // add a box to current location to "preview" ship placement
         }
         
-        if (recognizer.state == UIGestureRecognizerState.ended) && !shipPlaced {               // when tap is release we want to place the ship
-//            resetTapped(0)                                                                     // simulate reset button to remove box node
+        if (recognizer.state == UIGestureRecognizerState.ended) && !shipPlaced {    // when tap is release we want to place the ship
+            resetTapped(0)                                                          // simulate reset button to remove box node
             
             let hitTestResults = sceneView.hitTest(tapLocation, types: .existingPlaneUsingExtent)
             
             guard let hitTestResult = hitTestResults.first else { return }
             let translation = hitTestResult.worldTransform.translation
             
-            let placeMatrix = [
-                [(0.2, 0, 0), (0.2, 0, 0), (0.2, 0, 0)], // x-axis
-                [(0, 0.2, 0), (0, 0.2, 0), (0, 0.2, 0)],] // y-axis
-//                [(0, 0, 1), (0, 0, 1), (0, 0, 1)], // z-axis
-//
-//                [(1, 1, 0), (1, 1, 0), (1, 1, 0)], // xy plane
-//                [(2, 1, 0), (2, 1, 0), (2, 1, 0)],
-//
-//                [(0, 1, 1), (0, 1, 1), (0, 1, 1)], // yz plane
-//                [(0, 2, 1), (0, 2, 1), (0, 2, 1)],
-//
-//                [(1, 0, 1), (1, 0, 1), (1, 0, 1)], // xz plane
-//                [(2, 0, 1), (2, 0, 1), (2, 0, 1)],
-//
-//                [(1, 1, 1), (1, 1, 1), (1, 1, 1)], // xyz
-//                [(1, 2, 1), (1, 2, 1), (1, 2, 1)],
-//                [(2, 2, 1), (2, 2, 1), (2, 2, 1)],
-//                [(2, 1, 1), (2, 1, 1), (2, 1, 1)]]
+            let createMatrix = [
+                (0, 0, 0), (0, 0, -0.2), (0.2, 0, 0),
+                (0, 0, 0.2), (0, 0, 0.2), (-0.2, 0, 0),
+                (-0.2, 0, 0), (0, 0, -0.2), (0, 0, -0.2),
+                
+                (0, 0.2, 0), (0.2, 0, 0), (0.2, 0, 0),
+                (0, 0, 0.2), (0, 0, 0.2), (-0.2, 0, 0),
+                (-0.2, 0, 0), (0, 0, -0.2), (0.2, 0, 0),
+                
+                (0, 0.2, 0), (0, 0, -0.2), (0.2, 0, 0),
+                (0, 0, 0.2), (0, 0, 0.2), (-0.2, 0, 0),
+                (-0.2, 0, 0), (0, 0, -0.2), (0, 0, -0.2)]
             
-            for check in placeMatrix {
-
-                for add in check {
-                    let xadd = translation.x + Float(add.0)
-                    let yadd = translation.y + Float(add.1)
-                    let zadd = translation.z + Float(add.2)
-                    
-                    guard let shipScene = SCNScene(named: "art.scnassets/ship.scn") else { fatalError() }
-                    guard let shipNode = shipScene.rootNode.childNode(withName: "Cube", recursively: false)
-                        else { fatalError() }
-                    
-                    shipNode.position = SCNVector3(x: xadd, y: yadd, z: zadd)
-                    sceneView.scene.rootNode.addChildNode(shipNode)
-                    self.shipObj = shipNode
-                    }
-                }
-
+            var xval = translation.x
+            var yval = translation.y
+            var zval = translation.z
+            
+            for i in createMatrix {
+                xval += Float(i.0)
+                yval += Float(i.1)
+                zval += Float(i.2)
+                
+                guard let shipScene = SCNScene(named: "art.scnassets/ship.scn") else { fatalError() }
+                guard let shipNode = shipScene.rootNode.childNode(withName: "Cube", recursively: false)
+                    else { fatalError() }
+                
+                shipNode.position = SCNVector3(x: xval, y: yval, z: zval)
+                sceneView.scene.rootNode.addChildNode(shipNode)
+                self.shipObj = shipNode
             }
-            
-
-//            shipPlaced = true
-        
         }
     }
     
