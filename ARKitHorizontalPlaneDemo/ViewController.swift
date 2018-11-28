@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     
     var prevLocation = CGPoint(x: 0, y: 0)      // variable to capute prev location
     var shipObj: SCNNode!
+    var boxObj: SCNNode!
     var shipPlaced: Bool = false {  // bool to lock only one ship in the scene
         didSet {
             sceneView.debugOptions = shipPlaced ? [] : [.showFeaturePoints] //Hide Feature points based on ships existence or not.
@@ -58,6 +59,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadAssets()
+        
         addTapGestureToSceneView()
         configureLighting()
         
@@ -93,7 +96,14 @@ class ViewController: UIViewController {
     /*
      This function takes in a scene tap location co-ordinates and adds a box node to the scene
      */
-    func addBox(x: Float = 0, y: Float = 0, z: Float = -0.2) {
+    func loadAssets() {
+        guard let boxScene = SCNScene(named: "art.scnassets/ship.scn") else { fatalError() }
+        guard let boxNode = boxScene.rootNode.childNode(withName: "preview", recursively: false)
+            else { fatalError() }
+        self.boxObj = boxNode
+    }
+    
+    func addPreviewBox(x: Float = 0, y: Float = 0, z: Float = -0.2) {
         let box = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0)
         
         let boxNode = SCNNode()
@@ -108,59 +118,61 @@ class ViewController: UIViewController {
      This function is called when the tap gesture is activated
      */
     @objc func addShipToSceneView(withGestureRecognizer recognizer: UIGestureRecognizer) {
-//        print("tap")
+
         let tapLocation = recognizer.location(in: sceneView)
         
-        if prevLocation != tapLocation && !shipPlaced {
-            
-            prevLocation = tapLocation      // set current tap location to prev
-            resetTapped(0)                  // simulate reset button to remove prev objects
-            
+        if !shipPlaced {
             let hitTestResults = sceneView.hitTest(tapLocation, types: .existingPlaneUsingExtent)
             
             guard let hitTestResult = hitTestResults.first else { return }
             let translation = hitTestResult.worldTransform.translation
             
-            addBox(x: translation.x, y: translation.y, z: translation.z)       // add a box to current location to "preview" ship placement
-        }
-        
-        if (recognizer.state == UIGestureRecognizerState.ended) && !shipPlaced {    // when tap is release we want to place the ship
-            resetTapped(0)                                                          // simulate reset button to remove box node
-            
-            let hitTestResults = sceneView.hitTest(tapLocation, types: .existingPlaneUsingExtent)
-            
-            guard let hitTestResult = hitTestResults.first else { return }
-            let translation = hitTestResult.worldTransform.translation
-            
-            let createMatrix = [
-                (0, 0, 0), (0, 0, -0.2), (0.2, 0, 0),
-                (0, 0, 0.2), (0, 0, 0.2), (-0.2, 0, 0),
-                (-0.2, 0, 0), (0, 0, -0.2), (0, 0, -0.2),
+            if prevLocation != tapLocation && !shipPlaced {
                 
-                (0, 0.2, 0), (0.2, 0, 0), (0.2, 0, 0),
-                (0, 0, 0.2), (0, 0, 0.2), (-0.2, 0, 0),
-                (-0.2, 0, 0), (0, 0, -0.2), (0.2, 0, 0),
+                prevLocation = tapLocation      // set current tap location to prev
+                resetTapped(0)                  // simulate reset button to remove prev objects
                 
-                (0, 0.2, 0), (0, 0, -0.2), (0.2, 0, 0),
-                (0, 0, 0.2), (0, 0, 0.2), (-0.2, 0, 0),
-                (-0.2, 0, 0), (0, 0, -0.2), (0, 0, -0.2)]
+                boxObj.position = SCNVector3(x: translation.x, y: translation.y, z: translation.z)
+                
+                sceneView.scene.rootNode.addChildNode(boxObj)
+            }
             
-            var xval = translation.x
-            var yval = translation.y
-            var zval = translation.z
             
-            for i in createMatrix {
-                xval += Float(i.0)
-                yval += Float(i.1)
-                zval += Float(i.2)
+            if (recognizer.state == UIGestureRecognizerState.ended) && !shipPlaced {    // when tap is release we want to place the ship
+                resetTapped(0)                                                          // simulate reset button to remove box node
                 
-                guard let shipScene = SCNScene(named: "art.scnassets/ship.scn") else { fatalError() }
-                guard let shipNode = shipScene.rootNode.childNode(withName: "Cube", recursively: false)
-                    else { fatalError() }
+                let createMatrix = [
+                    (0, 0, 0), (0, 0, -0.2), (0.2, 0, 0),
+                    (0, 0, 0.2), (0, 0, 0.2), (-0.2, 0, 0),
+                    (-0.2, 0, 0), (0, 0, -0.2), (0, 0, -0.2),
+                    
+                    (0, 0.2, 0), (0.2, 0, 0), (0.2, 0, 0),
+                    (0, 0, 0.2), (0, 0, 0.2), (-0.2, 0, 0),
+                    (-0.2, 0, 0), (0, 0, -0.2), (0.2, 0, 0),
+                    
+                    (0, 0.2, 0), (0, 0, -0.2), (0.2, 0, 0),
+                    (0, 0, 0.2), (0, 0, 0.2), (-0.2, 0, 0),
+                    (-0.2, 0, 0), (0, 0, -0.2), (0, 0, -0.2)]
                 
-                shipNode.position = SCNVector3(x: xval, y: yval, z: zval)
-                sceneView.scene.rootNode.addChildNode(shipNode)
-                self.shipObj = shipNode
+                var xval = translation.x
+                var yval = translation.y
+                var zval = translation.z
+                
+                for i in createMatrix {
+                    xval += Float(i.0)
+                    yval += Float(i.1)
+                    zval += Float(i.2)
+                    
+                    guard let shipScene = SCNScene(named: "art.scnassets/ship.scn") else { fatalError() }
+                    guard let shipNode = shipScene.rootNode.childNode(withName: "Cube", recursively: false)
+                        else { fatalError() }
+                    
+                    shipNode.position = SCNVector3(x: xval, y: yval, z: zval)
+                    sceneView.scene.rootNode.addChildNode(shipNode)
+                    self.shipObj = shipNode
+                }
+                
+                self.shipPlaced = true;
             }
         }
     }
