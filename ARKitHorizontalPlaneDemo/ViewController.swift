@@ -65,8 +65,6 @@ class ViewController: UIViewController {
         configureLighting()
         
         addPinchGestureToSceneView()
-        
-        addTapGestureToCells()
 
     }
     
@@ -144,41 +142,51 @@ class ViewController: UIViewController {
             if (recognizer.state == UIGestureRecognizerState.ended) && !shipPlaced {    // when tap is release we want to place the ship
                 resetTapped(0)                                                          // simulate reset button to remove box node
                 
-                let createMatrix = [
-                    (0, 0, 0), (0, 0, -0.2), (0.2, 0, 0),
-                    (0, 0, 0.2), (0, 0, 0.2), (-0.2, 0, 0),
-                    (-0.2, 0, 0), (0, 0, -0.2), (0, 0, -0.2),
-                    
-                    (0, 0.2, 0), (0.2, 0, 0), (0.2, 0, 0),
-                    (0, 0, 0.2), (0, 0, 0.2), (-0.2, 0, 0),
-                    (-0.2, 0, 0), (0, 0, -0.2), (0.2, 0, 0),
-                    
-                    (0, 0.2, 0), (0, 0, -0.2), (0.2, 0, 0),
-                    (0, 0, 0.2), (0, 0, 0.2), (-0.2, 0, 0),
-                    (-0.2, 0, 0), (0, 0, -0.2), (0, 0, -0.2)]
-                
-                var xval = translation.x
+                var xval = translation.x - 0.2
                 var yval = translation.y
-                var zval = translation.z
+                var zval = translation.z + 0.2
                 
-                for i in createMatrix {
-                    xval += Float(i.0)
-                    yval += Float(i.1)
-                    zval += Float(i.2)
-                    
-                    guard let shipScene = SCNScene(named: "art.scnassets/ship.scn") else { fatalError() }
-                    guard let shipNode = shipScene.rootNode.childNode(withName: "Cube", recursively: false)
-                        else { fatalError() }
-                    
-                    shipNode.position = SCNVector3(x: xval, y: yval, z: zval)
-                    sceneView.scene.rootNode.addChildNode(shipNode)
-//                    shipNode.name =
-                    self.shipObj = shipNode
+                // note to self: upper right name is 202
+                for i in 0...2 {
+                    for j in 0...2 {
+                        for k in 0...2 {
+                            
+                            guard let shipScene = SCNScene(named: "art.scnassets/ship.scn") else { fatalError() }
+                            guard let shipNode = shipScene.rootNode.childNode(withName: "Cube", recursively: false)
+                                else { fatalError() }
+                            
+                            shipNode.position = SCNVector3(x: xval, y: yval, z: zval)
+                            sceneView.scene.rootNode.addChildNode(shipNode)
+                            shipNode.name = String(i) + String(j) + String(k)
+                            self.shipObj = shipNode
+//                            print(String(i) + String(j) + String(k))
+                            xval += 0.2
+                        }
+                        xval -= 0.6
+                        zval -= 0.2
+                    }
+                    zval += 0.6
+                    yval += 0.2
                 }
-                
+
                 shipPlaced = true;
             }
         }
+        
+        else {
+//            tapAction(recognizer: recognizer)
+        
+            if recognizer.state == .ended {
+                let location: CGPoint = recognizer.location(in: sceneView)
+                let hits = self.sceneView.hitTest(location, options: nil)
+                if !hits.isEmpty {
+                    let tappedNode = hits.first?.node
+                    print(tappedNode?.name ?? "...")
+                    print("TAPPPPPED!!!")
+                }
+            }
+        }
+
     }
     
     /*New Feature
@@ -192,31 +200,22 @@ class ViewController: UIViewController {
         sceneView.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    
 
-//    let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
-    
-    //Add recognizer to sceneview
-//    sceneView.addGestureRecognizer(tapRec)
-    
-    //Method called when tap
-    @objc func tapAction(rec: UITapGestureRecognizer){
-        
-        if rec.state == .ended {
-            let location: CGPoint = rec.location(in: sceneView)
-            let hits = self.sceneView.hitTest(location, options: nil)
-            if !hits.isEmpty{
-                let tappedNode = hits.first?.node
-                print("TAPPPPPED!!!")
-            }
-        }
-    }
 
-    func addTapGestureToCells() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapAction))
-        tapGestureRecognizer.delegate = self
-        sceneView.addGestureRecognizer(tapGestureRecognizer)
-    }
+//    //    Method called when tap on a cell
+//    func tapAction(recognizer: UITapGestureRecognizer){
+//
+//        if recognizer.state == .ended {
+//            let location: CGPoint = recognizer.location(in: sceneView)
+//            let hits = self.sceneView.hitTest(location, options: nil)
+//            if !hits.isEmpty {
+//                let tappedNode = hits.first?.node
+//                print(tappedNode?.name ?? "...")
+//                print("TAPPPPPED!!!")
+//            }
+//        }
+//    }
+
     
     /*
      New Feature
