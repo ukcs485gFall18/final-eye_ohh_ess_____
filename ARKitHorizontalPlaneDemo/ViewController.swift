@@ -65,6 +65,9 @@ class ViewController: UIViewController {
         configureLighting()
         
         addPinchGestureToSceneView()
+        
+        addTapGestureToCells()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -169,10 +172,11 @@ class ViewController: UIViewController {
                     
                     shipNode.position = SCNVector3(x: xval, y: yval, z: zval)
                     sceneView.scene.rootNode.addChildNode(shipNode)
+//                    shipNode.name =
                     self.shipObj = shipNode
                 }
                 
-                self.shipPlaced = true;
+                shipPlaced = true;
             }
         }
     }
@@ -184,6 +188,32 @@ class ViewController: UIViewController {
     func addTapGestureToSceneView() {
         let tapGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(addShipToSceneView))
         tapGestureRecognizer.minimumPressDuration = 0
+        tapGestureRecognizer.delegate = self
+        sceneView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    
+
+//    let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(rec:)))
+    
+    //Add recognizer to sceneview
+//    sceneView.addGestureRecognizer(tapRec)
+    
+    //Method called when tap
+    @objc func tapAction(rec: UITapGestureRecognizer){
+        
+        if rec.state == .ended {
+            let location: CGPoint = rec.location(in: sceneView)
+            let hits = self.sceneView.hitTest(location, options: nil)
+            if !hits.isEmpty{
+                let tappedNode = hits.first?.node
+                print("TAPPPPPED!!!")
+            }
+        }
+    }
+
+    func addTapGestureToCells() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapAction))
         tapGestureRecognizer.delegate = self
         sceneView.addGestureRecognizer(tapGestureRecognizer)
     }
@@ -215,9 +245,6 @@ class ViewController: UIViewController {
         pinchGestureRecognizer.delegate = self
         sceneView.addGestureRecognizer(pinchGestureRecognizer)
     }
-    
-    
-    
     
 }
 
