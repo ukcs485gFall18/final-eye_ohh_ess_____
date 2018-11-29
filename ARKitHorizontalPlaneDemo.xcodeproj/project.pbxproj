@@ -95,7 +95,6 @@
 				618DDF002187975200CFE2B8 /* Cell.swift */,
 				618DDEFF2187975200CFE2B8 /* CheckWinner.swift */,
 				618DDF012187975200CFE2B8 /* Cube.swift */,
-<<<<<<< HEAD
 				614A12F221881D7B0091421D /* Plane.swift */,
 				614A12F421881F170091421D /* Node.swift */,
 				614A12F6218834370091421D /* ShipNode.swift */,
@@ -108,9 +107,6 @@
 		614A12E22187F9960091421D /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
-=======
-				B34CF21E21881650009386A8 /* EasyAI.swift */,
->>>>>>> refactor
 				638A9CF11FBA0605001D52ED /* Main.storyboard */,
 				638A9CF61FBA0605001D52ED /* LaunchScreen.storyboard */,
 			);

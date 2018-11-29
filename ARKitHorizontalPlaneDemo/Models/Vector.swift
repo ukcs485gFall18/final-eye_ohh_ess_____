@@ -21,3 +21,11 @@ struct Vector {
         self.zCoordinate = translation.z
     }
 }
+
+
+
+
+
+
+
+
