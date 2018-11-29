@@ -13,41 +13,26 @@ class ViewController: UIViewController {
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var rotationSlider: UISlider!
-    
-    var prevLocation = CGPoint(x: 0, y: 0)      // variable to capute prev location
-    var shipObj: SCNNode!
-    var boxObj: SCNNode!
-    var cubePlaced: Bool = false {  // bool to lock only one ship in the scene
-        didSet {
-            sceneView.debugOptions = cubePlaced ? [] : [.showFeaturePoints] //Hide Feature points based on ships existence or not.
-        }
-    }
-    
-    
-    var cube = [[[SCNNode]]]()
-    
+
+    var cube: Cube!
     
     /*
      Author: Karthik
      This function removes all objects (nodes) placed in the scene
      */
     @IBAction func resetTapped(_ sender: Any) {
-        sceneView.scene.rootNode.enumerateChildNodes { (node, stop) in
-            node.removeFromParentNode()
-        }
-        cubePlaced = false
+        cube.reset()
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadAssets()
         configureLighting()
-    
         addTapGestureToSceneView()
         
-        addPinchGestureToSceneView()
+//        addPinchGestureToSceneView()
+        self.cube =  Cube(sceneView: sceneView)
+        cube.loadAssets()
     }
     
     
@@ -74,20 +59,12 @@ class ViewController: UIViewController {
     }
     
 
-    func loadAssets() {
-        guard let boxScene = SCNScene(named: "art.scnassets/ship.scn") else { fatalError() }
-        guard let boxNode = boxScene.rootNode.childNode(withName: "preview", recursively: false)
-            else { fatalError() }
-        self.boxObj = boxNode
-    }
-    
-
     func configureLighting() {
         sceneView.autoenablesDefaultLighting = true
         sceneView.automaticallyUpdatesLighting = true
     }
     
-    
+
     /*
      Author: Karthik
      This function assign the long press gesture with 0 delay to take advantage of on release functionality
@@ -98,177 +75,69 @@ class ViewController: UIViewController {
         tapGestureRecognizer.delegate = self
         sceneView.addGestureRecognizer(tapGestureRecognizer)
     }
-    
+
     /*
      Author: Karthik
      This function is called when the tap gesture is activated
      */
     @objc func tapAction(withGestureRecognizer recognizer: UIGestureRecognizer) {
-        
+
         let tapLocation: CGPoint = recognizer.location(in: sceneView)
         
-        if !cubePlaced {
-            placeCube(withGestureRecognizer: recognizer, tapLocation: tapLocation)
+        if !cube.cubePlaced {
+            cube.handleCubeTap(withGestureRecognizer: recognizer, tapLocation: tapLocation)
         }
-            
-        else {
-            if recognizer.state == .ended {
-                
-                let hits = self.sceneView.hitTest(tapLocation, options: nil)
-                if !hits.isEmpty {
-                    let tappedNode = hits.first?.node
-                    
-                    let cubeIndex: String = tappedNode!.name!
-                    
-                    print(cubeIndex)
-                    print("TAPPPPPED!!!")
-                    
-    
-                    
-                    var moveArr = Array(cubeIndex)
-                    
-                    let x = Int(String(moveArr[0]))!
-                    let y = Int(String(moveArr[1]))!
-                    let z = Int(String(moveArr[2]))!
-                    
-                    
-                    guard let shipScene = SCNScene(named: "art.scnassets/ship.scn") else { fatalError() }
-                    guard let ball = shipScene.rootNode.childNode(withName: "Cube", recursively: false)
-                        else { fatalError() }
-                    
-                    ball.position = cube[x][y][z].position
-                    sceneView.scene.rootNode.addChildNode(ball)
-                    ball.name = cube[x][y][z].name
-                    
-                    sceneView.scene.rootNode.replaceChildNode(cube[x][y][z], with: ball)
-                    cube[x][y][z] = ball
-                }
-            }
-        }
-    }
-    
-    
-    func placeCube(withGestureRecognizer recognizer: UIGestureRecognizer, tapLocation: CGPoint){
-        
-        let hitTestResults = sceneView.hitTest(tapLocation, types: .existingPlaneUsingExtent)
-        
-        guard let hitTestResult = hitTestResults.first else { return }
-        let translation: float3 = hitTestResult.worldTransform.translation
-        
-        if prevLocation != tapLocation && !cubePlaced {
-            prevLocation = tapLocation      // set current tap location to prev
-            previewCube(translation: translation)
-        }
-        
-        if (recognizer.state == UIGestureRecognizerState.ended) && !cubePlaced {    // when tap is release we want to place the ship
-            placeFinalCube(translation: translation)
-        }
-    }
-    
-    
-    func previewCube(translation: float3) {
-        resetTapped(0)                  // simulate reset button to remove prev objects
-        
-        boxObj.position = SCNVector3(x: translation.x, y: translation.y, z: translation.z)
-        sceneView.scene.rootNode.addChildNode(boxObj)
-    }
-    
-    func placeFinalCube(translation: float3) {
-        resetTapped(0)                                                          // simulate reset button to remove box node
-        
-        var xval = translation.x - 0.2
-        var yval = translation.y
-        var zval = translation.z + 0.2
-        
-        // note to self: upper right name is 202
-        
-        for i in 0...2 {
-            var layerZ = [[SCNNode]]()
-            for j in 0...2 {
-                var layerX = [SCNNode]()
-                for k in 0...2 {
-                    
-                    guard let shipScene = Cell(named: "art.scnassets/ship.scn") else { fatalError() }
-                    guard let shipNode = shipScene.rootNode.childNode(withName: "Cell-Empty", recursively: false)
-                        else { fatalError() }
-                    
-                    shipNode.position = SCNVector3(x: xval, y: yval, z: zval)
-                    sceneView.scene.rootNode.addChildNode(shipNode)
-                    shipNode.name = String(i) + String(j) + String(k)
-//                    self.shipObj = shipNode
-                    
-                    //                            print(String(i) + String(j) + String(k))
-                    xval += 0.2
-                    layerX.append(shipNode)
-                }
-                
-                
-                xval -= 0.6
-                zval -= 0.2
-                layerZ.append(layerX)
-            }
-            zval += 0.6
-            yval += 0.2
-            cube.append(layerZ)
-        }
-        
-        cubePlaced = true;
-        
-    }
-    
-    
-    
 
-    
-    
-    
-    
-    
+        else {
+            cube.handleCellTap(withGestureRecognizer: recognizer, tapLocation: tapLocation)
+        }
+    }
+
     /* New Feature
      Authors: Deavin, Yacob
      This function assign the pinch gesture
      */
-    func addPinchGestureToSceneView() {
-        let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinchToZoom))
-        pinchGestureRecognizer.delegate = self
-        sceneView.addGestureRecognizer(pinchGestureRecognizer)
-    }
+//    func addPinchGestureToSceneView() {
+//        let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinchToZoom))
+//        pinchGestureRecognizer.delegate = self
+//        sceneView.addGestureRecognizer(pinchGestureRecognizer)
+//    }
     
     /*
      New Feature
      Author: Deavin
      This function is called when the pinch gesture is activated
      */
-    @objc func pinchToZoom(_ gesture: UIPinchGestureRecognizer) {
-        //        print("pinch")
-        guard let ship = shipObj else { return }
-        if gesture.state == .began || gesture.state == .changed{
-            
-            let pinch = [Float(gesture.scale) * ship.scale.x,
-                         Float(gesture.scale) * ship.scale.y,
-                         Float(gesture.scale) * ship.scale.z]
-            ship.scale = SCNVector3Make(pinch[0], pinch[1], pinch[2])
-            gesture.scale = 1
-        }
-    }
-    
-    //New Feature
-    // Author: Dagmawi
-    //This function gets called everytime the user slides the UISlider
-    @IBAction func rotate3DObject(_ sender: UISlider) {
-        if cubePlaced {
-            sceneView.scene.rootNode.enumerateChildNodes {[weak self] (node, stop) in
-                self?.rotate(node, with: sender.value)
-            }
-        }
-    }
+//    @objc func pinchToZoom(_ gesture: UIPinchGestureRecognizer) {
+//        //        print("pinch")
+//        guard let ship = shipObj else { return }
+//        if gesture.state == .began || gesture.state == .changed{
+//
+//            let pinch = [Float(gesture.scale) * ship.scale.x,
+//                         Float(gesture.scale) * ship.scale.y,
+//                         Float(gesture.scale) * ship.scale.z]
+//            ship.scale = SCNVector3Make(pinch[0], pinch[1], pinch[2])
+//            gesture.scale = 1
+//        }
+//    }
+//
+//    //New Feature
+//    // Author: Dagmawi
+//    //This function gets called everytime the user slides the UISlider
+//    @IBAction func rotate3DObject(_ sender: UISlider) {
+//        if cubePlaced {
+//            sceneView.scene.rootNode.enumerateChildNodes {[weak self] (node, stop) in
+//                self?.rotate(node, with: sender.value)
+//            }
+//        }
+//    }
     
     //New Feature
     //Author: Dagmawi
     //This function rotates the 3D object in the ARSCNView
-    private func rotate(_ node: SCNNode, with value: Float){
-        node.eulerAngles.y = value // Changing the Y value makes the 3D object rotate around the y-axis
-    }
+//    private func rotate(_ node: SCNNode, with value: Float){
+//        node.eulerAngles.y = value // Changing the Y value makes the 3D object rotate around the y-axis
+//    }
 }
 
 extension float4x4 {
@@ -289,7 +158,7 @@ extension ViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         
         // We safely unwrap the anchor argument as an ARPlaneAnchor to get information the flat surface at hand.
-        guard let planeAnchor = anchor as? ARPlaneAnchor, !cubePlaced else { return }
+        guard let planeAnchor = anchor as? ARPlaneAnchor, !cube.cubePlaced else { return }
         
         // creating an SCNPlane to visualize the ARPlaneAnchor
         let width = CGFloat(planeAnchor.extent.x)
