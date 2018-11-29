@@ -7,8 +7,10 @@
 //
 
 import Foundation
+import UIKit
+import ARKit
 
-class Cell {
+class Cell: SCNNode {
     
     enum cellState {
         case sphere
@@ -36,7 +38,11 @@ class Cell {
         // set cell location in space relative to 0,1,0
         
         // set preferred size
-        
+        super.init()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func fillX() {

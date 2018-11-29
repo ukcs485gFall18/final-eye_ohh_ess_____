@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+import ARKit
 
 
 class Cube {
@@ -14,15 +16,16 @@ class Cube {
     var defaultCell = Cell(x: 0, y: 0, z: 0)
     var cube = [[[Cell]]]()
     
-    init() {
-        // set preferred size
-        
+
+    init () {
         self.cube = [[[Cell]]](repeating:[[Cell]](repeating:[Cell](repeating:defaultCell, count:3), count:3), count:3)
-        
+
         fillCubeArray()
-        
-        // set object to preview outline cube
     }
+    
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
     public func actionPerformed() {
         // get touch location and determine cell to be modified
@@ -34,13 +37,13 @@ class Cube {
     
     public func fillCubeArray() {
         // fill cells in the cube 3D array array
-        for i in 0...2 {
-            for j in 0...2 {
-                for k in 0...2 {
-                    cube[i][j][k] = Cell(x: i, y: j, z: k)
-                }
-            }
-        }
+//        for i in 0...2 {
+//            for j in 0...2 {
+//                for k in 0...2 {
+//                    cube[i][j][k] = Cell(x: i, y: j, z: k)
+//                }
+//            }
+//        }
     }
     
     public func fillCubeObject() {
@@ -67,4 +70,5 @@ class Cube {
         // maybe reposition
     
     }
+
 }

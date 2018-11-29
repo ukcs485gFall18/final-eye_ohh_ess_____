@@ -14,7 +14,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var rotationSlider: UISlider!
     
-    
     var prevLocation = CGPoint(x: 0, y: 0)      // variable to capute prev location
     var shipObj: SCNNode!
     var boxObj: SCNNode!
@@ -23,6 +22,10 @@ class ViewController: UIViewController {
             sceneView.debugOptions = cubePlaced ? [] : [.showFeaturePoints] //Hide Feature points based on ships existence or not.
         }
     }
+    
+    
+    var cube = [[[SCNNode]]]()
+    
     
     /*
      Author: Karthik
@@ -41,6 +44,7 @@ class ViewController: UIViewController {
         
         loadAssets()
         configureLighting()
+    
         addTapGestureToSceneView()
         
         addPinchGestureToSceneView()
@@ -113,8 +117,31 @@ class ViewController: UIViewController {
                 let hits = self.sceneView.hitTest(tapLocation, options: nil)
                 if !hits.isEmpty {
                     let tappedNode = hits.first?.node
-                    print(tappedNode?.name ?? "...")
+                    
+                    let cubeIndex: String = tappedNode!.name!
+                    
+                    print(cubeIndex)
                     print("TAPPPPPED!!!")
+                    
+    
+                    
+                    var moveArr = Array(cubeIndex)
+                    
+                    let x = Int(String(moveArr[0]))!
+                    let y = Int(String(moveArr[1]))!
+                    let z = Int(String(moveArr[2]))!
+                    
+                    
+                    guard let shipScene = SCNScene(named: "art.scnassets/ship.scn") else { fatalError() }
+                    guard let ball = shipScene.rootNode.childNode(withName: "Cube", recursively: false)
+                        else { fatalError() }
+                    
+                    ball.position = cube[x][y][z].position
+                    sceneView.scene.rootNode.addChildNode(ball)
+                    ball.name = cube[x][y][z].name
+                    
+                    sceneView.scene.rootNode.replaceChildNode(cube[x][y][z], with: ball)
+                    cube[x][y][z] = ball
                 }
             }
         }
@@ -130,23 +157,23 @@ class ViewController: UIViewController {
         
         if prevLocation != tapLocation && !cubePlaced {
             prevLocation = tapLocation      // set current tap location to prev
-            PreviewCube(translation: translation)
+            previewCube(translation: translation)
         }
         
         if (recognizer.state == UIGestureRecognizerState.ended) && !cubePlaced {    // when tap is release we want to place the ship
-            PlaceCube(translation: translation)
+            placeFinalCube(translation: translation)
         }
     }
     
     
-    func PreviewCube(translation: float3) {
+    func previewCube(translation: float3) {
         resetTapped(0)                  // simulate reset button to remove prev objects
         
         boxObj.position = SCNVector3(x: translation.x, y: translation.y, z: translation.z)
         sceneView.scene.rootNode.addChildNode(boxObj)
     }
     
-    func PlaceCube(translation: float3) {
+    func placeFinalCube(translation: float3) {
         resetTapped(0)                                                          // simulate reset button to remove box node
         
         var xval = translation.x - 0.2
@@ -154,29 +181,39 @@ class ViewController: UIViewController {
         var zval = translation.z + 0.2
         
         // note to self: upper right name is 202
+        
         for i in 0...2 {
+            var layerZ = [[SCNNode]]()
             for j in 0...2 {
+                var layerX = [SCNNode]()
                 for k in 0...2 {
                     
                     guard let shipScene = SCNScene(named: "art.scnassets/ship.scn") else { fatalError() }
-                    guard let shipNode = shipScene.rootNode.childNode(withName: "Cube", recursively: false)
+                    guard let shipNode = shipScene.rootNode.childNode(withName: "Cell-Empty", recursively: false)
                         else { fatalError() }
                     
                     shipNode.position = SCNVector3(x: xval, y: yval, z: zval)
                     sceneView.scene.rootNode.addChildNode(shipNode)
                     shipNode.name = String(i) + String(j) + String(k)
-                    self.shipObj = shipNode
+//                    self.shipObj = shipNode
+                    
                     //                            print(String(i) + String(j) + String(k))
                     xval += 0.2
+                    layerX.append(shipNode)
                 }
+                
+                
                 xval -= 0.6
                 zval -= 0.2
+                layerZ.append(layerX)
             }
             zval += 0.6
             yval += 0.2
+            cube.append(layerZ)
         }
         
         cubePlaced = true;
+        
     }
     
     
@@ -231,7 +268,7 @@ class ViewController: UIViewController {
     //This function rotates the 3D object in the ARSCNView
     private func rotate(_ node: SCNNode, with value: Float){
         node.eulerAngles.y = value // Changing the Y value makes the 3D object rotate around the y-axis
-    } 
+    }
 }
 
 extension float4x4 {
