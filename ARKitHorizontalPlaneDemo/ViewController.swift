@@ -188,7 +188,7 @@ class ViewController: UIViewController {
                 var layerX = [SCNNode]()
                 for k in 0...2 {
                     
-                    guard let shipScene = SCNScene(named: "art.scnassets/ship.scn") else { fatalError() }
+                    guard let shipScene = Cell(named: "art.scnassets/ship.scn") else { fatalError() }
                     guard let shipNode = shipScene.rootNode.childNode(withName: "Cell-Empty", recursively: false)
                         else { fatalError() }
                     

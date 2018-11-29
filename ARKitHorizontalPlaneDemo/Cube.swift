@@ -11,17 +11,18 @@ import UIKit
 import ARKit
 
 
-class Cube {
+extension ARSCNView {
     
-    var defaultCell = Cell(x: 0, y: 0, z: 0)
-    var cube = [[[Cell]]]()
+    //var defaultCell = Cell(x: 0, y: 0, z: 0)
+    //var cube = [[[Cell]]]()
     
-
-    init () {
+    /*
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
         self.cube = [[[Cell]]](repeating:[[Cell]](repeating:[Cell](repeating:defaultCell, count:3), count:3), count:3)
-
+        
         fillCubeArray()
-    }
+    }*/
     
 //    required init?(coder aDecoder: NSCoder) {
 //        fatalError("init(coder:) has not been implemented")

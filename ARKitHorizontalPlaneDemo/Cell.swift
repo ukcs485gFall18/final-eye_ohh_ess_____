@@ -10,13 +10,14 @@ import Foundation
 import UIKit
 import ARKit
 
-class Cell: SCNNode {
+class Cell: SCNScene {
     
     enum cellState {
         case sphere
         case cross
         case empty
     }
+    
     
     struct Location {
         var x, y, z: Int?      // stores the location of the cell
@@ -26,7 +27,7 @@ class Cell: SCNNode {
     
     // touch/tap event listener
     // linkage to actual 3D objects
-    
+    /*
     init(x: Int, y: Int, z:Int) {
         self.location.x = x
         self.location.y = y
@@ -43,7 +44,7 @@ class Cell: SCNNode {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
+    }*/
     
     func fillX() {
         // replace the cell with the X 3D object
