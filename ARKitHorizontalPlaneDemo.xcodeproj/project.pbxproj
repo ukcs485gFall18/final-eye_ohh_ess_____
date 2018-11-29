@@ -16,6 +16,7 @@
 		638A9CF31FBA0605001D52ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 638A9CF11FBA0605001D52ED /* Main.storyboard */; };
 		638A9CF51FBA0605001D52ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 638A9CF41FBA0605001D52ED /* Assets.xcassets */; };
 		638A9CF81FBA0605001D52ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 638A9CF61FBA0605001D52ED /* LaunchScreen.storyboard */; };
+		B33881AC21AF90E500D7AE7D /* cell-empty.dae in Resources */ = {isa = PBXBuildFile; fileRef = B33881AB21AF90E500D7AE7D /* cell-empty.dae */; };
 		B34CF21F21881650009386A8 /* EasyAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34CF21E21881650009386A8 /* EasyAI.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +33,9 @@
 		638A9CF41FBA0605001D52ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		638A9CF71FBA0605001D52ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		638A9CF91FBA0605001D52ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B33881AB21AF90E500D7AE7D /* cell-empty.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "cell-empty.dae"; sourceTree = "<group>"; };
 		B34CF21E21881650009386A8 /* EasyAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyAI.swift; sourceTree = "<group>"; };
+    
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,9 +71,9 @@
 				638A9CFF1FBA0650001D52ED /* 3D Objects */,
 				638A9CED1FBA0605001D52ED /* AppDelegate.swift */,
 				638A9CEF1FBA0605001D52ED /* ViewController.swift */,
+				618DDF012187975200CFE2B8 /* Cube.swift */,
 				618DDF002187975200CFE2B8 /* Cell.swift */,
 				618DDEFF2187975200CFE2B8 /* CheckWinner.swift */,
-				618DDF012187975200CFE2B8 /* Cube.swift */,
 				B34CF21E21881650009386A8 /* EasyAI.swift */,
 				638A9CF11FBA0605001D52ED /* Main.storyboard */,
 				638A9CF41FBA0605001D52ED /* Assets.xcassets */,
@@ -85,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				614A12DB2187B11F0091421D /* cube-sphere.scn */,
+				B33881AB21AF90E500D7AE7D /* cell-empty.dae */,
 			);
 			path = "3D Objects";
 			sourceTree = "<group>";
@@ -149,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				638A9CF81FBA0605001D52ED /* LaunchScreen.storyboard in Resources */,
+				B33881AC21AF90E500D7AE7D /* cell-empty.dae in Resources */,
 				614A12DD2187B1910091421D /* art.scnassets in Resources */,
 				638A9CF51FBA0605001D52ED /* Assets.xcassets in Resources */,
 				638A9CF31FBA0605001D52ED /* Main.storyboard in Resources */,
@@ -309,7 +314,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G2DJ3Q6TF8;
+				DEVELOPMENT_TEAM = 74R9B42L62;
 				INFOPLIST_FILE = ARKitHorizontalPlaneDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -325,7 +330,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G2DJ3Q6TF8;
+				DEVELOPMENT_TEAM = 74R9B42L62;
 				INFOPLIST_FILE = ARKitHorizontalPlaneDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

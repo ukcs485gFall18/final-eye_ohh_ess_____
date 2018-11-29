@@ -7,8 +7,10 @@
 //
 
 import Foundation
+import UIKit
+import ARKit
 
-class Cell {
+class Cell: SCNScene {
     
     enum cellState {
         case sphere
@@ -16,17 +18,20 @@ class Cell {
         case empty
     }
     
-    var x, y, z: Int?      // stores the location of the cell
     
+    struct Location {
+        var x, y, z: Int?      // stores the location of the cell
+    }
+    var location = Location()
     var state: cellState?  // is reset for generator and solver
     
     // touch/tap event listener
     // linkage to actual 3D objects
-    
+    /*
     init(x: Int, y: Int, z:Int) {
-        self.x = x
-        self.y = y
-        self.z = z
+        self.location.x = x
+        self.location.y = y
+        self.location.z = z
         self.state = cellState.cross
         
         // create empty cell 3D object
@@ -34,8 +39,12 @@ class Cell {
         // set cell location in space relative to 0,1,0
         
         // set preferred size
-        
+        super.init()
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }*/
     
     func fillX() {
         // replace the cell with the X 3D object
