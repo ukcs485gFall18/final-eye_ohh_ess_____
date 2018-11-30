@@ -27,20 +27,20 @@ class EasyAI {
         }
     }
     
-    func removeLocation(x: Int, y: Int, z:Int) {
-        let idx = availablePositions.firstIndex(of: String(x) + String(y) + String(z))
+    func removeValidMove(cellIndex: String) {
+        let idx = availablePositions.firstIndex(of: cellIndex)
         availablePositions.remove(at: idx!)
     }
     
-    func getMove() -> Location {
+    func getMove() -> String {
         let moveStr = availablePositions.randomElement()
-        var location = Location()
-        
-        var moveArr = Array(moveStr!)
-        
-        location.x = Int(String(moveArr[0]))
-        location.y = Int(String(moveArr[1]))
-        location.z = Int(String(moveArr[2]))
-        return location
+//        var location = Location()
+//        
+//        var moveArr = Array(moveStr!)
+//        
+//        location.x = Int(String(moveArr[0]))
+//        location.y = Int(String(moveArr[1]))
+//        location.z = Int(String(moveArr[2]))
+        return moveStr!
     }
 }

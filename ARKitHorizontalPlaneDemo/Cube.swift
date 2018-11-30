@@ -25,11 +25,14 @@ class Cube {
     @IBOutlet weak var sceneView: ARSCNView!
     var previewBox: SCNNode!
     var lastPlaced = SCNNode()
+    var original: SCNNode!
 //    var lastCellName: String = ""
     var cube = [[[Cell]]]()
 
     var cubePlaced: Bool = false
     var prevLocation = CGPoint(x: 0, y: 0)
+    
+    var ai = EasyAI()
 
     init(sceneView: ARSCNView) {
         self.sceneView = sceneView
@@ -124,38 +127,54 @@ class Cube {
             
             if !hits.isEmpty {
                 let tappedNode = hits.first?.node
-                let tappedCell = getCell(node: tappedNode!)
+                let tappedCell = getCellfromName(cellIndex: tappedNode!.name!)
                 
                 print(tappedCell.cellName)
                 
-                tappedCell.setCellState(state: Cell.cellState.cross)
+                tappedCell.setCellState(state: Cell.cellState.sphere)
                 tappedCell.setPosition(pos: (tappedNode?.position)!)
+                print(cube[0][0][0].state!)
                 sceneView.scene.rootNode.replaceChildNode(tappedNode!, with: tappedCell.cellNode)
 
+                
+                ai.removeValidMove(cellIndex: tappedCell.cellName)
+
+                let aiMoveCell = getCellfromName(cellIndex: ai.getMove())
+                var nodeToReplace: SCNNode!
+
+                sceneView.scene.rootNode.enumerateChildNodes { (node, stop) in
+                    if node.name == aiMoveCell.cellName {
+                        nodeToReplace = node
+                    }
+                }
+
+                print("AI played" + aiMoveCell.cellName)
+                aiMoveCell.setCellState(state: Cell.cellState.cross)
+                aiMoveCell.setPosition(pos: (nodeToReplace.position))
+                sceneView.scene.rootNode.replaceChildNode(nodeToReplace, with: aiMoveCell.cellNode)
+                ai.removeValidMove(cellIndex: aiMoveCell.cellName)
             }
+            
         }
         else {
             let hits = self.sceneView.hitTest(tapLocation, options: nil)
             if !hits.isEmpty {
                 let tappedNode = hits.first?.node
-                
+
                 if tappedNode!.name != lastPlaced.name {
-                    
+
                     if lastPlaced.name != "" {
-                        let lastCell = getCell(node: lastPlaced)
-                        lastCell.setCellState(state: Cell.cellState.empty)
-                        lastCell.setPosition(pos: (lastPlaced.position))
-                        sceneView.scene.rootNode.replaceChildNode(lastPlaced, with: lastCell.cellNode)
+                        sceneView.scene.rootNode.replaceChildNode(lastPlaced, with: original)
                     }
                     
-                   
-                    let tappedCell = getCell(node: tappedNode!)
-                    tappedCell.setCellState(state: Cell.cellState.sphere)
-                    tappedCell.setPosition(pos: (tappedNode?.position)!)
-                    sceneView.scene.rootNode.replaceChildNode(tappedNode!, with: tappedCell.cellNode)
+                    original = tappedNode
+                    let previewCell = makeNode(state: cellState.sphere)
+                    previewCell.position = tappedNode!.position
+                    previewCell.name = tappedNode!.name
                     
-                    
-                    lastPlaced = tappedCell.cellNode
+                    sceneView.scene.rootNode.replaceChildNode(tappedNode!, with: previewCell)
+
+                    lastPlaced = previewCell
                     print(lastPlaced.name!)
 
                 }
@@ -163,9 +182,8 @@ class Cube {
         }
     }
     
-    private func getCell(node: SCNNode) -> Cell {
-        
-        let cellIndex: String = node.name!
+
+    private func getCellfromName(cellIndex: String) -> Cell {
         
         var cellIndexArr = Array(cellIndex)
         
@@ -220,6 +238,29 @@ class Cube {
         
         // maybe reposition
     
+    }
+    
+    func makeNode(state: cellState) -> SCNNode {
+        var name: String!
+        if (state == cellState.empty) {
+            name = "Cell-Empty"
+        }
+        else if (state == cellState.cross) {
+            name = "Cell-Cross"
+        }
+        else if (state == cellState.sphere){
+            name = "Cell-Sphere"
+        }
+        else { fatalError() }
+        
+//        self.state = state          // set stare to empty, cross or sphere
+        
+        guard let gameScene = SCNScene(named: "art.scnassets/game.scn") else { fatalError() }
+        guard let node = gameScene.rootNode.childNode(withName: name, recursively: false)
+            else { fatalError() }
+        
+        
+        return node
     }
 
 }

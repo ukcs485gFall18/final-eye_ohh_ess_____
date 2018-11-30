@@ -62,9 +62,12 @@ class Cell {
         guard let node = gameScene.rootNode.childNode(withName: name, recursively: false)
             else { fatalError() }
         
+        
         self.cellNode = node
         self.cellNode.name = cellName
     }
+    
+
     
 //    func setPosition(xval: Float, yval: Float, zval: Float) {
 //        self.cellNode.position = SCNVector3(x: xval, y: yval, z: zval)

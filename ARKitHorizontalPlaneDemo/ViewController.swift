@@ -86,6 +86,8 @@ class ViewController: UIViewController {
         
         if !cube.cubePlaced {
             cube.handleCubeTap(withGestureRecognizer: recognizer, tapLocation: tapLocation)
+            
+            
         }
 
         else {
