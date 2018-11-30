@@ -13,9 +13,6 @@ import ARKit
 
 class Cube {
     
-    //var defaultCell = Cell(x: 0, y: 0, z: 0)
-    //var cube = [[[Cell]]]()
-    
     enum cellState {
         case sphere
         case cross
@@ -26,13 +23,7 @@ class Cube {
     var previewBox: SCNNode!
     var lastPlaced = SCNNode()
     var original: SCNNode!
-//    var lastCellName: String = ""
     var cube = [[[Cell]]]()
-
-    var cubePlaced: Bool = false
-    var prevLocation = CGPoint(x: 0, y: 0)
-    
-    var ai = EasyAI()
 
     init(sceneView: ARSCNView) {
         self.sceneView = sceneView
@@ -48,42 +39,13 @@ class Cube {
         self.previewBox = boxNode
     }
     
-    func reset() {
-         // remove cell nodes from the scene
-        sceneView.scene.rootNode.enumerateChildNodes { (node, stop) in
-            node.removeFromParentNode()
-        }
-        cubePlaced = false
-    }
-    
-    
-    func handleCubeTap(withGestureRecognizer recognizer: UIGestureRecognizer, tapLocation: CGPoint){
-        
-        let hitTestResults = sceneView.hitTest(tapLocation, types: .existingPlaneUsingExtent)
-        
-        guard let hitTestResult = hitTestResults.first else { return }
-        let translation: float3 = hitTestResult.worldTransform.translation
-        
-        if prevLocation != tapLocation && !cubePlaced {
-            prevLocation = tapLocation      // set current tap location to prev
-            previewCube(translation: translation)
-        }
-        
-        if (recognizer.state == UIGestureRecognizerState.ended) && !cubePlaced {    // when tap is release we want to place the ship
-            placeCube(translation: translation)
-        }
-    }
-    
-    
-    func previewCube(translation: float3) {
-        reset()                  // simulate reset button to remove prev objects
-        
+    func previewCube(translation: float3) {        
         previewBox.position = SCNVector3(x: translation.x, y: translation.y, z: translation.z)
         sceneView.scene.rootNode.addChildNode(previewBox)
     }
     
     func placeCube(translation: float3) {
-        reset()                                                           // simulate reset button to remove box node
+        // fill cells in the cube 3D array array
         
         var xval = translation.x - 0.2
         var yval = translation.y
@@ -114,74 +76,43 @@ class Cube {
             yval += 0.2
             cube.append(layerZ)
         }
-        
-        cubePlaced = true;
-        
     }
     
-    
-    func handleCellTap(withGestureRecognizer recognizer: UIGestureRecognizer, tapLocation: CGPoint) {
-        if recognizer.state == .ended {
-
-            let hits = self.sceneView.hitTest(tapLocation, options: nil)
-            
-            if !hits.isEmpty {
-                let tappedNode = hits.first?.node
-                let tappedCell = getCellfromName(cellIndex: tappedNode!.name!)
-                
-                print(tappedCell.cellName)
-                
-                tappedCell.setCellState(state: Cell.cellState.sphere)
-                tappedCell.setPosition(pos: (tappedNode?.position)!)
-                print(cube[0][0][0].state!)
-                sceneView.scene.rootNode.replaceChildNode(tappedNode!, with: tappedCell.cellNode)
-
-                
-                ai.removeValidMove(cellIndex: tappedCell.cellName)
-
-                let aiMoveCell = getCellfromName(cellIndex: ai.getMove())
-                var nodeToReplace: SCNNode!
-
-                sceneView.scene.rootNode.enumerateChildNodes { (node, stop) in
-                    if node.name == aiMoveCell.cellName {
-                        nodeToReplace = node
-                    }
-                }
-
-                print("AI played" + aiMoveCell.cellName)
-                aiMoveCell.setCellState(state: Cell.cellState.cross)
-                aiMoveCell.setPosition(pos: (nodeToReplace.position))
-                sceneView.scene.rootNode.replaceChildNode(nodeToReplace, with: aiMoveCell.cellNode)
-                ai.removeValidMove(cellIndex: aiMoveCell.cellName)
-            }
-            
+    func placeCell(node: SCNNode, isUser: Bool) -> String {
+        
+        let tappedCell = getCellfromName(cellIndex: node.name!)
+        
+        if (isUser) {
+            tappedCell.setCellState(state: Cell.cellState.sphere)
         }
         else {
-            let hits = self.sceneView.hitTest(tapLocation, options: nil)
-            if !hits.isEmpty {
-                let tappedNode = hits.first?.node
-
-                if tappedNode!.name != lastPlaced.name {
-
-                    if lastPlaced.name != "" {
-                        sceneView.scene.rootNode.replaceChildNode(lastPlaced, with: original)
-                    }
-                    
-                    original = tappedNode
-                    let previewCell = makeNode(state: cellState.sphere)
-                    previewCell.position = tappedNode!.position
-                    previewCell.name = tappedNode!.name
-                    
-                    sceneView.scene.rootNode.replaceChildNode(tappedNode!, with: previewCell)
-
-                    lastPlaced = previewCell
-                    print(lastPlaced.name!)
-
-                }
-            }
+            tappedCell.setCellState(state: Cell.cellState.cross)
         }
+        
+        tappedCell.setPosition(pos: node.position)
+        sceneView.scene.rootNode.replaceChildNode(node, with: tappedCell.cellNode)
+        
+        return tappedCell.cellName
     }
     
+    func previewCell(node: SCNNode) {
+        
+        if node.name != lastPlaced.name {
+            
+            if lastPlaced.name != "" {
+                sceneView.scene.rootNode.replaceChildNode(lastPlaced, with: original)
+            }
+            
+            original = node
+            let previewCell = makeNode(state: cellState.sphere)
+            previewCell.position = node.position
+            previewCell.name = node.name
+            
+            sceneView.scene.rootNode.replaceChildNode(node, with: previewCell)
+            
+            lastPlaced = previewCell
+        }
+    }
 
     private func getCellfromName(cellIndex: String) -> Cell {
         
@@ -192,16 +123,6 @@ class Cube {
         let k = Int(String(cellIndexArr[2]))!
         
         return cube[i][j][k]
-    }
-    
-
-    
-    public func actionPerformed() {
-        // get touch location and determine cell to be modified
-        
-        // based on whos turn it is modify cell state (cross or sphere)
-        
-        // check game state checkWinner
     }
     
     public func fillCubeArray() {
@@ -215,29 +136,10 @@ class Cube {
 //        }
     }
     
-    public func fillCubeObject() {
-        // fill cells in the cube 3D array array
-    }
-    
-    public func previewCube() {
-        // replace the cube with the outline 3D object
-    }
-    
-    public func removeCube()   {  // NOTE: this function might now be needed.
-        // remove cell object from the scene
-    }
+
     
     public func setPreviewCubeSize()   {
         // update the preview Cube size as user resizes the cube
-    }
-    
-    private func newCube() {
-        // remove all cells
-        
-        fillCubeArray()
-        
-        // maybe reposition
-    
     }
     
     func makeNode(state: cellState) -> SCNNode {
@@ -252,8 +154,6 @@ class Cube {
             name = "Cell-Sphere"
         }
         else { fatalError() }
-        
-//        self.state = state          // set stare to empty, cross or sphere
         
         guard let gameScene = SCNScene(named: "art.scnassets/game.scn") else { fatalError() }
         guard let node = gameScene.rootNode.childNode(withName: name, recursively: false)

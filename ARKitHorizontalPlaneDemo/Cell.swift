@@ -27,8 +27,6 @@ class Cell {
     var cellName: String!
     var state: cellState?  // is reset for generator and solver
     
-    // touch/tap event listener
-    // linkage to actual 3D objects
     init(i: Int, j: Int, k:Int, state: cellState) {
         
         // set cell index
@@ -66,31 +64,12 @@ class Cell {
         self.cellNode = node
         self.cellNode.name = cellName
     }
-    
 
-    
-//    func setPosition(xval: Float, yval: Float, zval: Float) {
-//        self.cellNode.position = SCNVector3(x: xval, y: yval, z: zval)
-//    }
-//
     func setPosition(pos: SCNVector3) {
         self.cellNode.position = pos
     }
     
     func removeXO(cubeIndex: String, type: String) {
         // removes the 'X' or 'O' 3D object so it is a empty cell
-        
-    }
-    
-    func removeXO()   {
-        // remove object from the the cell
-    }
-    
-    func removeCell()   {  // NOTE: this function might now be needed.
-        // remove cell object from the scene
-    }
-    
-    func rePlaceCell()   {
-        // re position x, y, z placement during resize
     }
 }
