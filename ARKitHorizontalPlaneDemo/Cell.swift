@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import ARKit
 
-class Cell: SCNScene {
+class Cell {
     
     enum cellState {
         case sphere
@@ -18,54 +18,71 @@ class Cell: SCNScene {
         case empty
     }
     
-    
-    struct Location {
-        var x, y, z: Int?      // stores the location of the cell
+    struct Index {
+        var i, j, k: Int?      // stores the location of the cell
     }
-    var location = Location()
+    
+    var cellNode: SCNNode!
+    var index = Index()
+    var cellName: String!
     var state: cellState?  // is reset for generator and solver
     
     // touch/tap event listener
     // linkage to actual 3D objects
-    /*
-    init(x: Int, y: Int, z:Int) {
-        self.location.x = x
-        self.location.y = y
-        self.location.z = z
-        self.state = cellState.cross
+    init(i: Int, j: Int, k:Int, state: cellState) {
         
-        // create empty cell 3D object
+        // set cell index
+        self.index.i = i
+        self.index.j = j
+        self.index.k = k
+        self.cellName = String(i) + String(j) + String(k)
         
-        // set cell location in space relative to 0,1,0
+        self.setCellState(state: state)
         
-        // set preferred size
-        super.init()
+        //        set preferred size
+        //        super.init()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }*/
-    
-    func fillX() {
-        // replace the cell with the X 3D object
+    func setCellState(state: cellState) {
+        var name: String!
+        if (state == cellState.empty) {
+            name = "Cell-Empty"
+        }
+        else if (state == cellState.cross) {
+            name = "Cell-Cross"
+        }
+        else if (state == cellState.sphere){
+            name = "Cell-Sphere"
+        }
+        else { fatalError() }
+        
+        self.state = state          // set stare to empty, cross or sphere
+        
+        guard let gameScene = SCNScene(named: "art.scnassets/game.scn") else { fatalError() }
+        guard let node = gameScene.rootNode.childNode(withName: name, recursively: false)
+            else { fatalError() }
+        
+        self.cellNode = node
+        self.cellNode.name = cellName
     }
     
-    func prevX() {
-        // replace the cell with the X 3D object
+//    func setPosition(xval: Float, yval: Float, zval: Float) {
+//        self.cellNode.position = SCNVector3(x: xval, y: yval, z: zval)
+//    }
+//
+    func setPosition(pos: SCNVector3) {
+        self.cellNode.position = pos
     }
     
-    func fillO() {
-        // replace the cell with the preview O 3D object
-    }
-    
-    func prevO() {
-        // replace the cell with the preview X 3D object
+    func removeXO(cubeIndex: String, type: String) {
+        // removes the 'X' or 'O' 3D object so it is a empty cell
+        
     }
     
     func removeXO()   {
         // remove object from the the cell
     }
-
+    
     func removeCell()   {  // NOTE: this function might now be needed.
         // remove cell object from the scene
     }

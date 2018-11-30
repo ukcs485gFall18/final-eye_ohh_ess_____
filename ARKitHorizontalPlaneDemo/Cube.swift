@@ -16,9 +16,17 @@ class Cube {
     //var defaultCell = Cell(x: 0, y: 0, z: 0)
     //var cube = [[[Cell]]]()
     
+    enum cellState {
+        case sphere
+        case cross
+        case empty
+    }
+    
     @IBOutlet weak var sceneView: ARSCNView!
     var previewBox: SCNNode!
-    var cube = [[[SCNNode]]]()
+    var lastPlaced = SCNNode()
+//    var lastCellName: String = ""
+    var cube = [[[Cell]]]()
 
     var cubePlaced: Bool = false
     var prevLocation = CGPoint(x: 0, y: 0)
@@ -26,10 +34,12 @@ class Cube {
     init(sceneView: ARSCNView) {
         self.sceneView = sceneView
         loadAssets()
+        
+        self.lastPlaced.name = ""
     }
     
     func loadAssets() {
-        guard let boxScene = SCNScene(named: "art.scnassets/ship.scn") else { fatalError() }
+        guard let boxScene = SCNScene(named: "art.scnassets/game.scn") else { fatalError() }
         guard let boxNode = boxScene.rootNode.childNode(withName: "preview", recursively: false)
             else { fatalError() }
         self.previewBox = boxNode
@@ -79,22 +89,17 @@ class Cube {
         // note to self: upper right name is 202
         
         for i in 0...2 {
-            var layerZ = [[SCNNode]]()
+            var layerZ = [[Cell]]()
             for j in 0...2 {
-                var layerX = [SCNNode]()
+                var layerX = [Cell]()
                 for k in 0...2 {
                     
-                    guard let shipScene = Cell(named: "art.scnassets/ship.scn") else { fatalError() }
-                    guard let shipNode = shipScene.rootNode.childNode(withName: "Cell-Empty", recursively: false)
-                        else { fatalError() }
-                    
-                    shipNode.position = SCNVector3(x: xval, y: yval, z: zval)
-                    sceneView.scene.rootNode.addChildNode(shipNode)
-                    shipNode.name = String(i) + String(j) + String(k)
-                    
-                    //  print(String(i) + String(j) + String(k))
+                    let cell = Cell(i: i, j: j, k: k, state: Cell.cellState.empty)
+                    cell.setPosition(pos: SCNVector3(x: xval, y: yval, z: zval))
+                    sceneView.scene.rootNode.addChildNode(cell.cellNode)
+
                     xval += 0.2
-                    layerX.append(shipNode)
+                    layerX.append(cell)
                 }
                 
                 
@@ -116,35 +121,62 @@ class Cube {
         if recognizer.state == .ended {
 
             let hits = self.sceneView.hitTest(tapLocation, options: nil)
+            
             if !hits.isEmpty {
                 let tappedNode = hits.first?.node
+                let tappedCell = getCell(node: tappedNode!)
+                
+                print(tappedCell.cellName)
+                
+                tappedCell.setCellState(state: Cell.cellState.cross)
+                tappedCell.setPosition(pos: (tappedNode?.position)!)
+                sceneView.scene.rootNode.replaceChildNode(tappedNode!, with: tappedCell.cellNode)
 
-                let cubeIndex: String = tappedNode!.name!
+            }
+        }
+        else {
+            let hits = self.sceneView.hitTest(tapLocation, options: nil)
+            if !hits.isEmpty {
+                let tappedNode = hits.first?.node
+                
+                if tappedNode!.name != lastPlaced.name {
+                    
+                    if lastPlaced.name != "" {
+                        let lastCell = getCell(node: lastPlaced)
+                        lastCell.setCellState(state: Cell.cellState.empty)
+                        lastCell.setPosition(pos: (lastPlaced.position))
+                        sceneView.scene.rootNode.replaceChildNode(lastPlaced, with: lastCell.cellNode)
+                    }
+                    
+                   
+                    let tappedCell = getCell(node: tappedNode!)
+                    tappedCell.setCellState(state: Cell.cellState.sphere)
+                    tappedCell.setPosition(pos: (tappedNode?.position)!)
+                    sceneView.scene.rootNode.replaceChildNode(tappedNode!, with: tappedCell.cellNode)
+                    
+                    
+                    lastPlaced = tappedCell.cellNode
+                    print(lastPlaced.name!)
 
-                print(cubeIndex)
-                print("TAPPPPPED!!!")
-
-                var moveArr = Array(cubeIndex)
-
-                let x = Int(String(moveArr[0]))!
-                let y = Int(String(moveArr[1]))!
-                let z = Int(String(moveArr[2]))!
-
-
-                guard let shipScene = SCNScene(named: "art.scnassets/ship.scn") else { fatalError() }
-                guard let ball = shipScene.rootNode.childNode(withName: "Cube", recursively: false)
-                    else { fatalError() }
-
-                ball.position = cube[x][y][z].position
-                sceneView.scene.rootNode.addChildNode(ball)
-                ball.name = cube[x][y][z].name
-
-                sceneView.scene.rootNode.replaceChildNode(cube[x][y][z], with: ball)
-                cube[x][y][z] = ball
+                }
             }
         }
     }
     
+    private func getCell(node: SCNNode) -> Cell {
+        
+        let cellIndex: String = node.name!
+        
+        var cellIndexArr = Array(cellIndex)
+        
+        let i = Int(String(cellIndexArr[0]))!
+        let j = Int(String(cellIndexArr[1]))!
+        let k = Int(String(cellIndexArr[2]))!
+        
+        return cube[i][j][k]
+    }
+    
+
     
     public func actionPerformed() {
         // get touch location and determine cell to be modified

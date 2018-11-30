@@ -17,11 +17,13 @@
 		638A9CF51FBA0605001D52ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 638A9CF41FBA0605001D52ED /* Assets.xcassets */; };
 		638A9CF81FBA0605001D52ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 638A9CF61FBA0605001D52ED /* LaunchScreen.storyboard */; };
 		B33881AC21AF90E500D7AE7D /* cell-empty.dae in Resources */ = {isa = PBXBuildFile; fileRef = B33881AB21AF90E500D7AE7D /* cell-empty.dae */; };
+		B33B802221B0D55C008D5F81 /* cell-sphere-lighter.dae in Resources */ = {isa = PBXBuildFile; fileRef = B33B802121B0D55C008D5F81 /* cell-sphere-lighter.dae */; };
 		B34CF21F21881650009386A8 /* EasyAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34CF21E21881650009386A8 /* EasyAI.swift */; };
+		B3ED797821B0C95F00B822EF /* cell-cross.dae in Resources */ = {isa = PBXBuildFile; fileRef = B3ED797721B0C95F00B822EF /* cell-cross.dae */; };
+		B3ED797A21B0CA1D00B822EF /* cell-sphere.dae in Resources */ = {isa = PBXBuildFile; fileRef = B3ED797921B0CA1D00B822EF /* cell-sphere.dae */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		614A12DB2187B11F0091421D /* cube-sphere.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "cube-sphere.scn"; sourceTree = "<group>"; };
 		614A12DC2187B1910091421D /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		618DDEFF2187975200CFE2B8 /* CheckWinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckWinner.swift; sourceTree = "<group>"; };
 		618DDF002187975200CFE2B8 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
@@ -34,8 +36,10 @@
 		638A9CF71FBA0605001D52ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		638A9CF91FBA0605001D52ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B33881AB21AF90E500D7AE7D /* cell-empty.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "cell-empty.dae"; sourceTree = "<group>"; };
+		B33B802121B0D55C008D5F81 /* cell-sphere-lighter.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "cell-sphere-lighter.dae"; sourceTree = "<group>"; };
 		B34CF21E21881650009386A8 /* EasyAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyAI.swift; sourceTree = "<group>"; };
-    
+		B3ED797721B0C95F00B822EF /* cell-cross.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "cell-cross.dae"; sourceTree = "<group>"; };
+		B3ED797921B0CA1D00B822EF /* cell-sphere.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "cell-sphere.dae"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +91,9 @@
 		638A9CFF1FBA0650001D52ED /* 3D Objects */ = {
 			isa = PBXGroup;
 			children = (
-				614A12DB2187B11F0091421D /* cube-sphere.scn */,
+				B3ED797721B0C95F00B822EF /* cell-cross.dae */,
+				B3ED797921B0CA1D00B822EF /* cell-sphere.dae */,
+				B33B802121B0D55C008D5F81 /* cell-sphere-lighter.dae */,
 				B33881AB21AF90E500D7AE7D /* cell-empty.dae */,
 			);
 			path = "3D Objects";
@@ -153,10 +159,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				638A9CF81FBA0605001D52ED /* LaunchScreen.storyboard in Resources */,
+				B3ED797821B0C95F00B822EF /* cell-cross.dae in Resources */,
 				B33881AC21AF90E500D7AE7D /* cell-empty.dae in Resources */,
 				614A12DD2187B1910091421D /* art.scnassets in Resources */,
+				B3ED797A21B0CA1D00B822EF /* cell-sphere.dae in Resources */,
 				638A9CF51FBA0605001D52ED /* Assets.xcassets in Resources */,
 				638A9CF31FBA0605001D52ED /* Main.storyboard in Resources */,
+				B33B802221B0D55C008D5F81 /* cell-sphere-lighter.dae in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
