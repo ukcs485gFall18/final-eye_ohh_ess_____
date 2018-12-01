@@ -64,7 +64,7 @@ class Cell {
         self.cellNode = node
         self.cellNode.name = cellName
     }
-
+    
     func setPosition(pos: SCNVector3) {
         self.cellNode.position = pos
     }

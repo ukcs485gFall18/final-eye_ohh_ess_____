@@ -10,7 +10,7 @@ import Foundation
 
 
 class EasyAI {
-
+    
     func getMove(availablePositions: [String]) -> String {
         let moveStr = availablePositions.randomElement()
         return moveStr!

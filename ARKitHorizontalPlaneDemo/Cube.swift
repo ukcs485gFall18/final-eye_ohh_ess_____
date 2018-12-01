@@ -24,7 +24,7 @@ class Cube {
     var lastPlaced = SCNNode()
     var original: SCNNode!
     var cube = [[[Cell]]]()
-
+    
     init(sceneView: ARSCNView) {
         self.sceneView = sceneView
         loadAssets()
@@ -62,7 +62,7 @@ class Cube {
                     let cell = Cell(i: i, j: j, k: k, state: Cell.cellState.empty)
                     cell.setPosition(pos: SCNVector3(x: xval, y: yval, z: zval))
                     sceneView.scene.rootNode.addChildNode(cell.cellNode)
-
+                    
                     xval += 0.2
                     layerX.append(cell)
                 }
@@ -113,7 +113,7 @@ class Cube {
             lastPlaced = previewCell
         }
     }
-
+    
     private func getCellfromName(cellIndex: String) -> Cell {
         
         var cellIndexArr = Array(cellIndex)
@@ -127,16 +127,16 @@ class Cube {
     
     public func fillCubeArray() {
         // fill cells in the cube 3D array array
-//        for i in 0...2 {
-//            for j in 0...2 {
-//                for k in 0...2 {
-//                    cube[i][j][k] = Cell(x: i, y: j, z: k)
-//                }
-//            }
-//        }
+        //        for i in 0...2 {
+        //            for j in 0...2 {
+        //                for k in 0...2 {
+        //                    cube[i][j][k] = Cell(x: i, y: j, z: k)
+        //                }
+        //            }
+        //        }
     }
     
-
+    
     
     public func setPreviewCubeSize()   {
         // update the preview Cube size as user resizes the cube
@@ -162,5 +162,5 @@ class Cube {
         
         return node
     }
-
+    
 }

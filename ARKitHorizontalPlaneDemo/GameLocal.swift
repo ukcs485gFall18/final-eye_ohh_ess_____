@@ -44,7 +44,7 @@ class GameLocal {
         sceneView.scene.rootNode.enumerateChildNodes { (node, stop) in
             node.removeFromParentNode()
         }
-        self.cube = Cube(sceneView: sceneView)
+        //        self.cube = Cube(sceneView: sceneView)
         cubePlaced = false
     }
     
