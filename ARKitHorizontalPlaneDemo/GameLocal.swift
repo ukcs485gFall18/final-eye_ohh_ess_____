@@ -68,6 +68,10 @@ class GameLocal {
         }
     }
     
+    func userPinch(_ recognizer: UIPinchGestureRecognizer) {
+        cube.resize(recognizer)
+    }
+    
     private func handleGameMove(tapLocation: CGPoint, isTapComplete: Bool) {
         let hitTestResults = sceneView.hitTest(tapLocation, options: nil)
         

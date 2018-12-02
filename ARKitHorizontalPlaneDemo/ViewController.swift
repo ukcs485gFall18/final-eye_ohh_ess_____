@@ -27,7 +27,7 @@ class ViewController: UIViewController {
         configureLighting()
         addTapGestureToSceneView()
         
-        //        addPinchGestureToSceneView()
+        addPinchGestureToSceneView()
         
         self.localGame =  GameLocal(sceneView: sceneView)
     }
@@ -52,10 +52,8 @@ class ViewController: UIViewController {
         sceneView.session.run(configuration)
         
         sceneView.delegate = self
-        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showCreases, ARSCNDebugOptions.showWireframe, ARSCNDebugOptions.showBoundingBoxes, ARSCNDebugOptions.showConstraints]
     }
-    
-    
     
     
     func configureLighting() {
@@ -87,29 +85,22 @@ class ViewController: UIViewController {
      Authors: Deavin, Yacob
      This function assign the pinch gesture
      */
-    //    func addPinchGestureToSceneView() {
-    //        let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinchToZoom))
-    //        pinchGestureRecognizer.delegate = self
-    //        sceneView.addGestureRecognizer(pinchGestureRecognizer)
-    //    }
+    func addPinchGestureToSceneView() {
+        let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(pinchToZoom))
+        pinchGestureRecognizer.delegate = self
+        sceneView.addGestureRecognizer(pinchGestureRecognizer)
+    }
     
     /*
      New Feature
      Author: Deavin
      This function is called when the pinch gesture is activated
      */
-    //    @objc func pinchToZoom(_ gesture: UIPinchGestureRecognizer) {
-    //        //        print("pinch")
-    //        guard let ship = shipObj else { return }
-    //        if gesture.state == .began || gesture.state == .changed{
-    //
-    //            let pinch = [Float(gesture.scale) * ship.scale.x,
-    //                         Float(gesture.scale) * ship.scale.y,
-    //                         Float(gesture.scale) * ship.scale.z]
-    //            ship.scale = SCNVector3Make(pinch[0], pinch[1], pinch[2])
-    //            gesture.scale = 1
-    //        }
-    //    }
+    @objc func pinchToZoom(_ gesture: UIPinchGestureRecognizer) {
+//        print("pinch")
+        localGame.userPinch(gesture)
+    }
+    
     //
     //    //New Feature
     //    // Author: Dagmawi

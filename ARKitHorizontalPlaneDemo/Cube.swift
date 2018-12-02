@@ -163,4 +163,28 @@ class Cube {
         return node
     }
     
+    func resize(_ gesture: UIPinchGestureRecognizer) {
+        print("print")
+        for i in 0...2 {
+            for j in 0...2 {
+                for k in 0...2 {
+                    let cell = cube[i][j][k].cellNode!
+                    
+                    
+                    if gesture.state == .began || gesture.state == .changed  {
+                        
+                        let pinchScaleX: CGFloat = gesture.scale * CGFloat((cell.scale.x))
+                        let pinchScaleY: CGFloat = gesture.scale * CGFloat((cell.scale.y))
+                        let pinchScaleZ: CGFloat = gesture.scale * CGFloat((cell.scale.z))
+                        cell.scale = SCNVector3Make(Float(pinchScaleX), Float(pinchScaleY), Float(pinchScaleZ))
+                        gesture.scale = 1
+                        
+                    }
+                    
+//                    sceneView.scene.rootNode.addChildNode(cell)
+                }
+            }
+        }
+    }
+    
 }
