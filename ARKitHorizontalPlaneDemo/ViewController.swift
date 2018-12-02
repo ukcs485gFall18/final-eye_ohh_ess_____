@@ -7,14 +7,16 @@
 
 import UIKit
 import ARKit
+import MultipeerConnectivity
 
 class ViewController: UIViewController {
-    
+ 
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var rotationSlider: UISlider!
-    
+
     var localGame: GameLocal!
+    var localMultiplayer = LocalMultiplayer()
     
     @IBAction func rePlace(_ sender: Any) {
         localGame.rePlace()
@@ -26,24 +28,22 @@ class ViewController: UIViewController {
         
         configureLighting()
         addTapGestureToSceneView()
+        localMultiplayer.setupMPC()
         
         //        addPinchGestureToSceneView()
-        
+
         self.localGame =  GameLocal(sceneView: sceneView)
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setUpSceneView()
     }
     
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         sceneView.session.pause()
     }
-    
     
     func setUpSceneView() {
         let configuration = ARWorldTrackingConfiguration()
@@ -52,12 +52,9 @@ class ViewController: UIViewController {
         sceneView.session.run(configuration)
         
         sceneView.delegate = self
-        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+        sceneView.debugOptions = [SCNDebugOptions.showFeaturePoints]
     }
-    
-    
-    
-    
+
     func configureLighting() {
         sceneView.autoenablesDefaultLighting = true
         sceneView.automaticallyUpdatesLighting = true
@@ -128,6 +125,31 @@ class ViewController: UIViewController {
     //    private func rotate(_ node: SCNNode, with value: Float){
     //        node.eulerAngles.y = value // Changing the Y value makes the 3D object rotate around the y-axis
     //    }
+    
+    @IBAction func showConnectivity(_ sender: Any) {
+        let actionSheet = UIAlertController(title: "ToDo Exchange", message: "Do you want to Host or Join a session?", preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "Host Session", style: .default, handler: { (action:UIAlertAction) in
+            
+
+            
+            self.localMultiplayer.mcAdvertiserAssistant = MCAdvertiserAssistant(serviceType: "ba-td", discoveryInfo: nil, session: self.localMultiplayer.mcSession)
+            self.localMultiplayer.mcAdvertiserAssistant.start()
+            
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Join Session", style: .default, handler: { (action:UIAlertAction) in
+            var mcBrowser = MCBrowserViewController(serviceType: "ba-td", session: self.localMultiplayer.mcSession)
+            mcBrowser.delegate = self
+            
+            self.present(mcBrowser, animated: true, completion: nil)
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        
+        self.present(actionSheet, animated: true, completion: nil)
+    }
 }
 
 extension float4x4 {
@@ -200,5 +222,16 @@ extension ViewController: UIGestureRecognizerDelegate {
     //Delegate function Allows view to recognize multiple gestures simultaneously
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
+    }
+}
+
+extension ViewController:  MCBrowserViewControllerDelegate {
+
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        dismiss(animated: true, completion: nil)
     }
 }

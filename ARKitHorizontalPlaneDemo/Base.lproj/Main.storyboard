@@ -17,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jI8-gS-dO0">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jI8-gS-dO0">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                             </arscnView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="izN-Ax-RD8">
                                 <rect key="frame" x="312" y="20" width="51" height="30"/>
@@ -28,13 +28,17 @@
                                     <action selector="rePlace:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xdG-9d-Jmj"/>
                                 </connections>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-4" maxValue="4" translatesAutoresizingMaskIntoConstraints="NO" id="3Ik-MB-LaF">
-                                <rect key="frame" x="14" y="617" width="344" height="30"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Djp-6X-z1N">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <connections>
-                                    <action selector="rotate3DObject:" destination="BYZ-38-t0r" eventType="valueChanged" id="2rf-Ww-sn4"/>
-                                </connections>
-                            </slider>
+                                <items>
+                                    <barButtonItem systemItem="action" id="xDk-AG-0W2">
+                                        <connections>
+                                            <action selector="showConnectivity:" destination="BYZ-38-t0r" id="AaY-yg-FTc"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -45,8 +49,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="rotationSlider" destination="3Ik-MB-LaF" id="7Uq-mJ-MVw"/>
                         <outlet property="sceneView" destination="jI8-gS-dO0" id="oTc-r2-wcA"/>
                     </connections>
                 </viewController>
