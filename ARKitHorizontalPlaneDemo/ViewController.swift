@@ -16,12 +16,9 @@ class ViewController: UIViewController {
     
     var localGame: GameLocal!
     
-    /*
-     Author: Karthik
-     This function removes all objects (nodes) placed in the scene
-     */
-    @IBAction func resetTapped(_ sender: Any) {
-        localGame.reset()
+    @IBAction func rePlace(_ sender: Any) {
+        localGame.rePlace()
+        setUpSceneView()
     }
     
     override func viewDidLoad() {
@@ -57,6 +54,8 @@ class ViewController: UIViewController {
         sceneView.delegate = self
         sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
     }
+    
+    
     
     
     func configureLighting() {

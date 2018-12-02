@@ -16,16 +16,24 @@ class GameLocal {
     @IBOutlet weak var sceneView: ARSCNView!
     
     var cube: Cube!
+    var availablePositions: [String] = []
+    
     var ai: EasyAI!
+    
     var prevLocation = CGPoint(x: 0, y: 0)
     var cubePlaced: Bool = false
-    var availablePositions: [String] = []
+    
+    func stopPlaneDetection() {
+        let configuration = ARWorldTrackingConfiguration()
+        configuration.planeDetection = []               // this tells sceneView to detect horizontal planes
+        sceneView.debugOptions = []
+        sceneView.session.run(configuration)
+    }
     
     init(sceneView: ARSCNView) {
         self.sceneView = sceneView
         
         self.cube = Cube(sceneView: sceneView)
-        cube.loadAssets()
         createAvailablePositions()
         
     }
@@ -40,11 +48,11 @@ class GameLocal {
         }
     }
     
-    func reset() {
+    func rePlace() {
         sceneView.scene.rootNode.enumerateChildNodes { (node, stop) in
             node.removeFromParentNode()
         }
-        //        self.cube = Cube(sceneView: sceneView)
+        
         cubePlaced = false
     }
     
@@ -64,8 +72,9 @@ class GameLocal {
         let hitTestResults = sceneView.hitTest(tapLocation, options: nil)
         
         guard let tappedNode = hitTestResults.first?.node else { return }
+        guard let nodeName = tappedNode.name else { return }
         
-        if (isTapComplete) && availablePositions.contains(tappedNode.name!) {    // when tap is release we want to place the cells
+        if (isTapComplete) && availablePositions.contains(nodeName) {    // when tap is release we want to place the cells
             
             let userMove = cube.placeCell(node: tappedNode, isUser: true)
             removeValidMove(cellIndex: userMove)
@@ -84,21 +93,24 @@ class GameLocal {
             }
             
         }
-        else if availablePositions.contains(tappedNode.name!) {
+            
+        else if availablePositions.contains(nodeName) {
             cube.previewCell(node: tappedNode)
         }
     }
     
     private func handleCubePlacement(tapLocation: CGPoint, isTapComplete: Bool){
-        reset()
+        cube.removeLastPreviewCube()
         let hitTestResults = sceneView.hitTest(tapLocation, types: .existingPlaneUsingExtent)
         
         guard let hitTestResult = hitTestResults.first else { return }
         let translation: float3 = hitTestResult.worldTransform.translation
         
         if (isTapComplete) {                // when tap is release we want to place the cube
+            rePlace()                       // remove plane
             cube.placeCube(translation: translation)
             cubePlaced = true
+            stopPlaneDetection()
         }
         else if prevLocation != tapLocation {
             prevLocation = tapLocation      // set current tap location to prev
