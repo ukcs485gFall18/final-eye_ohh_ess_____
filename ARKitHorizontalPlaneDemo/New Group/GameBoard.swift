@@ -307,6 +307,7 @@ class GameBoard: SCNNode {
         isAnimating = true
         
         // Open animation
+//        SCNTransaction.animate(duration: <#T##TimeInterval#>, animations: <#T##(() -> Void)##(() -> Void)##() -> Void#>, completion: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
         
         SCNTransaction.animate(duration: GameBoard.animationDuration / 4, animations: {
         

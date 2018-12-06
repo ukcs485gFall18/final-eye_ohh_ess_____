@@ -58,7 +58,7 @@ class GameLocal {
     
     func userTap(withGestureRecognizer recognizer: UIGestureRecognizer) {
         let tapLocation: CGPoint = recognizer.location(in: sceneView)
-        let isTapComplete = recognizer.state == UIGestureRecognizerState.ended
+        let isTapComplete = recognizer.state == UIGestureRecognizer.State.ended
         
         if !cubePlaced {
             handleCubePlacement(tapLocation: tapLocation, isTapComplete: isTapComplete)
