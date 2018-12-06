@@ -20,6 +20,26 @@
 		B33B802221B0D55C008D5F81 /* cell-sphere-lighter.dae in Resources */ = {isa = PBXBuildFile; fileRef = B33B802121B0D55C008D5F81 /* cell-sphere-lighter.dae */; };
 		B33B802421B121A6008D5F81 /* GameLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33B802321B121A6008D5F81 /* GameLocal.swift */; };
 		B34CF21F21881650009386A8 /* EasyAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34CF21E21881650009386A8 /* EasyAI.swift */; };
+		B35C67C821B8FC94000ABA4A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35C67C721B8FC94000ABA4A /* Player.swift */; };
+		B35C67D021B8FDBA000ABA4A /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35C67CF21B8FDBA000ABA4A /* GameBoard.swift */; };
+		B35C67D221B8FDBC000ABA4A /* BoardAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35C67D121B8FDBC000ABA4A /* BoardAnchor.swift */; };
+		B35C67D421B8FDBE000ABA4A /* GameBoardBorderSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35C67D321B8FDBE000ABA4A /* GameBoardBorderSegment.swift */; };
+		B35C67D921B902D4000ABA4A /* KeyPositionAnchor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35C67D821B902D4000ABA4A /* KeyPositionAnchor.swift */; };
+		B35C681321B9074F000ABA4A /* ARSCNView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35C680421B9074F000ABA4A /* ARSCNView+Helpers.swift */; };
+		B35C681421B9074F000ABA4A /* ARWorldMap+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35C680521B9074F000ABA4A /* ARWorldMap+Helpers.swift */; };
+		B35C681521B9074F000ABA4A /* simd+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35C680621B9074F000ABA4A /* simd+Helpers.swift */; };
+		B35C681621B9074F000ABA4A /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35C680721B9074F000ABA4A /* Data+Compression.swift */; };
+		B35C681721B9074F000ABA4A /* SCNPhysicsBody+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35C680821B9074F000ABA4A /* SCNPhysicsBody+Helper.swift */; };
+		B35C681821B9074F000ABA4A /* SCNShadable+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35C680921B9074F000ABA4A /* SCNShadable+Helpers.swift */; };
+		B35C681921B9074F000ABA4A /* SCNMaterial+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35C680A21B9074F000ABA4A /* SCNMaterial+Helpers.swift */; };
+		B35C681A21B9074F000ABA4A /* CGPoint+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35C680B21B9074F000ABA4A /* CGPoint+Helpers.swift */; };
+		B35C681B21B9074F000ABA4A /* SCNNode+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35C680C21B9074F000ABA4A /* SCNNode+Helpers.swift */; };
+		B35C681C21B9074F000ABA4A /* UserDefaults+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35C680D21B9074F000ABA4A /* UserDefaults+Helpers.swift */; };
+		B35C681D21B9074F000ABA4A /* ARCamera+Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35C680E21B9074F000ABA4A /* ARCamera+Debug.swift */; };
+		B35C681E21B9074F000ABA4A /* SCNPlane+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35C680F21B9074F000ABA4A /* SCNPlane+Helpers.swift */; };
+		B35C681F21B9074F000ABA4A /* SCNNode+Materials.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35C681021B9074F000ABA4A /* SCNNode+Materials.swift */; };
+		B35C682021B9074F000ABA4A /* Bundle+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35C681121B9074F000ABA4A /* Bundle+Helpers.swift */; };
+		B35C682121B9074F000ABA4A /* UIView+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35C681221B9074F000ABA4A /* UIView+Helpers.swift */; };
 		B3ED797821B0C95F00B822EF /* cell-cross.dae in Resources */ = {isa = PBXBuildFile; fileRef = B3ED797721B0C95F00B822EF /* cell-cross.dae */; };
 		B3ED797A21B0CA1D00B822EF /* cell-sphere.dae in Resources */ = {isa = PBXBuildFile; fileRef = B3ED797921B0CA1D00B822EF /* cell-sphere.dae */; };
 /* End PBXBuildFile section */
@@ -40,6 +60,26 @@
 		B33B802121B0D55C008D5F81 /* cell-sphere-lighter.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "cell-sphere-lighter.dae"; sourceTree = "<group>"; };
 		B33B802321B121A6008D5F81 /* GameLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLocal.swift; sourceTree = "<group>"; };
 		B34CF21E21881650009386A8 /* EasyAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyAI.swift; sourceTree = "<group>"; };
+		B35C67C721B8FC94000ABA4A /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		B35C67CF21B8FDBA000ABA4A /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
+		B35C67D121B8FDBC000ABA4A /* BoardAnchor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardAnchor.swift; sourceTree = "<group>"; };
+		B35C67D321B8FDBE000ABA4A /* GameBoardBorderSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoardBorderSegment.swift; sourceTree = "<group>"; };
+		B35C67D821B902D4000ABA4A /* KeyPositionAnchor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyPositionAnchor.swift; sourceTree = "<group>"; };
+		B35C680421B9074F000ABA4A /* ARSCNView+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ARSCNView+Helpers.swift"; sourceTree = "<group>"; };
+		B35C680521B9074F000ABA4A /* ARWorldMap+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ARWorldMap+Helpers.swift"; sourceTree = "<group>"; };
+		B35C680621B9074F000ABA4A /* simd+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "simd+Helpers.swift"; sourceTree = "<group>"; };
+		B35C680721B9074F000ABA4A /* Data+Compression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Compression.swift"; sourceTree = "<group>"; };
+		B35C680821B9074F000ABA4A /* SCNPhysicsBody+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNPhysicsBody+Helper.swift"; sourceTree = "<group>"; };
+		B35C680921B9074F000ABA4A /* SCNShadable+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNShadable+Helpers.swift"; sourceTree = "<group>"; };
+		B35C680A21B9074F000ABA4A /* SCNMaterial+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNMaterial+Helpers.swift"; sourceTree = "<group>"; };
+		B35C680B21B9074F000ABA4A /* CGPoint+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Helpers.swift"; sourceTree = "<group>"; };
+		B35C680C21B9074F000ABA4A /* SCNNode+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNNode+Helpers.swift"; sourceTree = "<group>"; };
+		B35C680D21B9074F000ABA4A /* UserDefaults+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Helpers.swift"; sourceTree = "<group>"; };
+		B35C680E21B9074F000ABA4A /* ARCamera+Debug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ARCamera+Debug.swift"; sourceTree = "<group>"; };
+		B35C680F21B9074F000ABA4A /* SCNPlane+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNPlane+Helpers.swift"; sourceTree = "<group>"; };
+		B35C681021B9074F000ABA4A /* SCNNode+Materials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNNode+Materials.swift"; sourceTree = "<group>"; };
+		B35C681121B9074F000ABA4A /* Bundle+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Helpers.swift"; sourceTree = "<group>"; };
+		B35C681221B9074F000ABA4A /* UIView+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Helpers.swift"; sourceTree = "<group>"; };
 		B3ED797721B0C95F00B822EF /* cell-cross.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "cell-cross.dae"; sourceTree = "<group>"; };
 		B3ED797921B0CA1D00B822EF /* cell-sphere.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "cell-sphere.dae"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,8 +116,11 @@
 			children = (
 				638A9CFF1FBA0650001D52ED /* 3D Objects */,
 				638A9CED1FBA0605001D52ED /* AppDelegate.swift */,
+				B35C67C721B8FC94000ABA4A /* Player.swift */,
 				638A9CEF1FBA0605001D52ED /* ViewController.swift */,
+				B35C67D521B8FDC2000ABA4A /* PreviewCubePlacement */,
 				B33B802321B121A6008D5F81 /* GameLocal.swift */,
+				B35C680321B90720000ABA4A /* Utilities */,
 				618DDF012187975200CFE2B8 /* Cube.swift */,
 				618DDF002187975200CFE2B8 /* Cell.swift */,
 				618DDEFF2187975200CFE2B8 /* CheckWinner.swift */,
@@ -100,6 +143,40 @@
 				B33881AB21AF90E500D7AE7D /* cell-empty.dae */,
 			);
 			path = "3D Objects";
+			sourceTree = "<group>";
+		};
+		B35C67D521B8FDC2000ABA4A /* PreviewCubePlacement */ = {
+			isa = PBXGroup;
+			children = (
+				B35C67CF21B8FDBA000ABA4A /* GameBoard.swift */,
+				B35C67D121B8FDBC000ABA4A /* BoardAnchor.swift */,
+				B35C67D821B902D4000ABA4A /* KeyPositionAnchor.swift */,
+				B35C67D321B8FDBE000ABA4A /* GameBoardBorderSegment.swift */,
+			);
+			name = PreviewCubePlacement;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		B35C680321B90720000ABA4A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B35C680E21B9074F000ABA4A /* ARCamera+Debug.swift */,
+				B35C680421B9074F000ABA4A /* ARSCNView+Helpers.swift */,
+				B35C680521B9074F000ABA4A /* ARWorldMap+Helpers.swift */,
+				B35C681121B9074F000ABA4A /* Bundle+Helpers.swift */,
+				B35C680B21B9074F000ABA4A /* CGPoint+Helpers.swift */,
+				B35C680721B9074F000ABA4A /* Data+Compression.swift */,
+				B35C680A21B9074F000ABA4A /* SCNMaterial+Helpers.swift */,
+				B35C680C21B9074F000ABA4A /* SCNNode+Helpers.swift */,
+				B35C681021B9074F000ABA4A /* SCNNode+Materials.swift */,
+				B35C680821B9074F000ABA4A /* SCNPhysicsBody+Helper.swift */,
+				B35C680F21B9074F000ABA4A /* SCNPlane+Helpers.swift */,
+				B35C680921B9074F000ABA4A /* SCNShadable+Helpers.swift */,
+				B35C680621B9074F000ABA4A /* simd+Helpers.swift */,
+				B35C681221B9074F000ABA4A /* UIView+Helpers.swift */,
+				B35C680D21B9074F000ABA4A /* UserDefaults+Helpers.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,12 +257,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				618DDF022187975200CFE2B8 /* CheckWinner.swift in Sources */,
+				B35C681321B9074F000ABA4A /* ARSCNView+Helpers.swift in Sources */,
 				618DDF042187975200CFE2B8 /* Cube.swift in Sources */,
+				B35C681521B9074F000ABA4A /* simd+Helpers.swift in Sources */,
+				B35C681621B9074F000ABA4A /* Data+Compression.swift in Sources */,
+				B35C67D421B8FDBE000ABA4A /* GameBoardBorderSegment.swift in Sources */,
+				B35C681B21B9074F000ABA4A /* SCNNode+Helpers.swift in Sources */,
+				B35C67D021B8FDBA000ABA4A /* GameBoard.swift in Sources */,
+				B35C67D221B8FDBC000ABA4A /* BoardAnchor.swift in Sources */,
+				B35C682121B9074F000ABA4A /* UIView+Helpers.swift in Sources */,
+				B35C682021B9074F000ABA4A /* Bundle+Helpers.swift in Sources */,
+				B35C681D21B9074F000ABA4A /* ARCamera+Debug.swift in Sources */,
 				618DDF032187975200CFE2B8 /* Cell.swift in Sources */,
 				B34CF21F21881650009386A8 /* EasyAI.swift in Sources */,
+				B35C681421B9074F000ABA4A /* ARWorldMap+Helpers.swift in Sources */,
 				B33B802421B121A6008D5F81 /* GameLocal.swift in Sources */,
+				B35C681A21B9074F000ABA4A /* CGPoint+Helpers.swift in Sources */,
 				638A9CF01FBA0605001D52ED /* ViewController.swift in Sources */,
+				B35C681721B9074F000ABA4A /* SCNPhysicsBody+Helper.swift in Sources */,
+				B35C681C21B9074F000ABA4A /* UserDefaults+Helpers.swift in Sources */,
+				B35C67C821B8FC94000ABA4A /* Player.swift in Sources */,
 				638A9CEE1FBA0605001D52ED /* AppDelegate.swift in Sources */,
+				B35C681821B9074F000ABA4A /* SCNShadable+Helpers.swift in Sources */,
+				B35C681F21B9074F000ABA4A /* SCNNode+Materials.swift in Sources */,
+				B35C681E21B9074F000ABA4A /* SCNPlane+Helpers.swift in Sources */,
+				B35C67D921B902D4000ABA4A /* KeyPositionAnchor.swift in Sources */,
+				B35C681921B9074F000ABA4A /* SCNMaterial+Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
