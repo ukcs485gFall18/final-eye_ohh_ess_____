@@ -21,10 +21,30 @@ class GameAI {
     var prevLocation = CGPoint(x: 0, y: 0)
     var cubePlaced: Bool = false
     
-    init() {
+    var easyPlayer: EasyAI!
+    var hardPlayer: HardAI!
+    
+    var checker = CheckWinner()
+    
+    enum aiMode {
+        case easy
+        case hard
+    }
+    
+    var difficulty: aiMode = aiMode.easy // default to easy
+    
+    init(sceneView: ARSCNView, difficulty: aiMode) {
+        self.sceneView = sceneView
         
         self.cube = Cube(sceneView: sceneView)
         createAvailablePositions()
+        
+        if difficulty == aiMode.easy {
+            easyPlayer = EasyAI()
+        }
+        else if difficulty == aiMode.hard {
+//            hardPlayer = HardAI()
+        }
     }
     
     func stopPlaneDetection() {
@@ -104,9 +124,23 @@ class GameAI {
             removeValidMove(cellIndex: userMove)
             print("User Played: " + userMove)
             
+            // check winner
+            if checker.checkGameState(cubeState: cube.cube, pos: userMove) == Cell.cellState.sphere {
+                // new view controller or alert that user won!
+                print("USER WINS")
+            }
+            
             // add ai game play here:
+            let aiMove = easyPlayer.getMove(availablePositions: availablePositions)
+            cube.placeCellOpp(cellIdx: aiMove, isUser: false)
+            removeValidMove(cellIndex: aiMove)
+            print("Easy Played: " + aiMove)
             
-            
+            // check winner
+            if checker.checkGameState(cubeState: cube.cube, pos: aiMove) == Cell.cellState.cross {
+                // new view controller or alert that AI won!
+                print("AI WINS")
+            }
             
         }
             

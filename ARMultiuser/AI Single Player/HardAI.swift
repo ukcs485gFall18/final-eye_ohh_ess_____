@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import ARKit
 
-class MediumAI {
+class HardAI {
     
     var cw = CheckWinner()
     let human = "X"

@@ -15,4 +15,5 @@ class EasyAI {
         let moveStr = availablePositions.randomElement()
         return moveStr!
     }
+    
 }

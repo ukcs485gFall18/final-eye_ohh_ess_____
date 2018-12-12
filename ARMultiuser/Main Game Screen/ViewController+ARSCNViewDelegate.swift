@@ -12,19 +12,25 @@ extension ViewController: ARSCNViewDelegate, ARSessionDelegate {
     
     // MARK: - ARSCNViewDelegate
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        if let name = anchor.name, name.hasPrefix("panda") && !localMultiplayer.cubePlaced {
-            localMultiplayer.loadCubefromPeer(location: anchor.transform.translation)
-//            localMultiplayer.cube.placeCube(translation: anchor.transform.translation)
+        if mode == gameMode.local {
+            if let name = anchor.name, name.hasPrefix("panda") && !localMultiplayer.cubePlaced {
+                localMultiplayer.loadCubefromPeer(location: anchor.transform.translation)
+                //            localMultiplayer.cube.placeCube(translation: anchor.transform.translation)
+            }
         }
     }
     
     // MARK: - ARSessionDelegate
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
-        localMultiplayer.updateSessionInfoLabel(for: session.currentFrame!, trackingState: camera.trackingState)
+        if mode == gameMode.local {
+            localMultiplayer.updateSessionInfoLabel(for: session.currentFrame!, trackingState: camera.trackingState)
+        }
     }
     
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        localMultiplayer.checkMappingStatus(frame: frame)
+        if mode == gameMode.local {
+            localMultiplayer.checkMappingStatus(frame: frame)
+        }
     }
     
     // MARK: - ARSessionObserver

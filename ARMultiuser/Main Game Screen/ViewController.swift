@@ -21,13 +21,40 @@ class ViewController: UIViewController {
     @IBOutlet weak var gameStatusLabel: UILabel!
     
     var localMultiplayer: GameLocalMultiplayer!
+    var AIsingleplayer: GameAI!
+    
+    enum gameMode {
+        case single
+        case local
+        case online
+    }
+    
+    var mode: gameMode = gameMode.single // default to localMultiplayer
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.localMultiplayer =  GameLocalMultiplayer(sessionInfoView: sessionInfoView, sessionInfoLabel: sessionInfoLabel, sceneView: sceneView, sendMapButton: sendMapButton, mappingStatusLabel: mappingStatusLabel, gameStatusLabel: gameStatusLabel)
+        if mode == gameMode.single {
+            self.hideAllLabels()
+            self.AIsingleplayer =  GameAI(sceneView: sceneView, difficulty: GameAI.aiMode.easy)
+        }
+        else if mode == gameMode.local {
+            self.localMultiplayer =  GameLocalMultiplayer(sessionInfoView: sessionInfoView, sessionInfoLabel: sessionInfoLabel, sceneView: sceneView, sendMapButton: sendMapButton, mappingStatusLabel: mappingStatusLabel, gameStatusLabel: gameStatusLabel)
+        }
+        else if mode == gameMode.online {
+            // add code @dagmawi
+        }
         
         addTapGestureToSceneView()
+    }
+    
+    func hideAllLabels() {
+        sessionInfoView.isHidden = true
+        sessionInfoLabel.isHidden = true
+        sendMapButton.isHidden = true
+        mappingStatusLabel.isHidden = true
+        mappingStatusLabel.isHidden = true
+        gameStatusLabel.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -79,12 +106,25 @@ class ViewController: UIViewController {
     
     // This function is called when the tap gesture is activated
     @objc func tapAction(withGestureRecognizer recognizer: UIGestureRecognizer) {
-        localMultiplayer.userTap(withGestureRecognizer: recognizer)
+        
+        if mode == gameMode.single {
+            AIsingleplayer.userTap(withGestureRecognizer: recognizer)
+        }
+        else if mode == gameMode.local {
+            localMultiplayer.userTap(withGestureRecognizer: recognizer)
+        }
+        else if mode == gameMode.online {
+            // add code @dagmawi
+        }
     }
     
     /// - Tag: GetWorldMap
     @IBAction func shareSession(_ button: UIButton) {
-        localMultiplayer.shareSession()
+        
+        if mode == gameMode.local {
+            localMultiplayer.shareSession()
+        }
+        
     }
     
     @IBAction func resetTracking(_ sender: UIButton?) {
@@ -92,7 +132,11 @@ class ViewController: UIViewController {
         configuration.planeDetection = .horizontal
         sceneView.session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
         sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
-        localMultiplayer.rePlace()
+        
+        if mode == gameMode.local {
+            localMultiplayer.rePlace()
+        }
+        
     }
 
 }
