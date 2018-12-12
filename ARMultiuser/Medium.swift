@@ -155,10 +155,10 @@ class MediumAI {
             k = Int(String(Array(pos)[2]))
         
         if isAI {
-            self.cube[i!][j!][k!].setCellState(state: Cell.cellState.cross)
+            self.cube[i!][j!][k!].state = Cell.cellState.cross
         }
         else {  // simulated player move
-            self.cube[i!][j!][k!].setCellState(state: Cell.cellState.sphere)
+            self.cube[i!][j!][k!].state = Cell.cellState.sphere
         }
         
         self.availablePositions.remove(at: self.availablePositions.firstIndex(of: pos)!)

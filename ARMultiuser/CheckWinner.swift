@@ -59,7 +59,7 @@ public class CheckWinner {
                     }
                 }
                 if win && state != Cell.cellState.empty {
-                    return state!
+                    return state
                 }
             }
         }
