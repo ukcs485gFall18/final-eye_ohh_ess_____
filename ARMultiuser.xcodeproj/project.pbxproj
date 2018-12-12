@@ -16,7 +16,6 @@
 		842316E71F2030C300D189D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842316E51F2030C300D189D1 /* Main.storyboard */; };
 		842316EC1F2030C300D189D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 842316EA1F2030C300D189D1 /* LaunchScreen.storyboard */; };
 		84ABEA0A1F3D15E70052D547 /* Assets.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 84ABEA091F3D15E70052D547 /* Assets.scnassets */; };
-		93282F3821C18617003A1826 /* Easy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93282F3721C18616003A1826 /* Easy.swift */; };
 		B306A2CF21C16ED800D5B2C2 /* GameLocalMultiplayer+ARSessionManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306A2CE21C16ED800D5B2C2 /* GameLocalMultiplayer+ARSessionManagement.swift */; };
 		B3233E5421C1821C00AD5BCD /* Medium.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3233E5321C1821C00AD5BCD /* Medium.swift */; };
 		B3233E5621C182A100AD5BCD /* CheckWinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3233E5521C182A100AD5BCD /* CheckWinner.swift */; };
@@ -42,7 +41,6 @@
 		842316EB1F2030C300D189D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		842316ED1F2030C300D189D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84ABEA091F3D15E70052D547 /* Assets.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Assets.scnassets; sourceTree = "<group>"; };
-		93282F3721C18616003A1826 /* Easy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Easy.swift; sourceTree = "<group>"; };
 		B306A2CE21C16ED800D5B2C2 /* GameLocalMultiplayer+ARSessionManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameLocalMultiplayer+ARSessionManagement.swift"; sourceTree = "<group>"; };
 		B3233E5321C1821C00AD5BCD /* Medium.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Medium.swift; sourceTree = "<group>"; };
 		B3233E5521C182A100AD5BCD /* CheckWinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckWinner.swift; sourceTree = "<group>"; };
@@ -88,7 +86,6 @@
 				842316DD1F2030C300D189D1 /* Products */,
 				75CD4F3075CDAC3000000001 /* Configuration */,
 				75CF3F3075CF41B000000001 /* LICENSE */,
-				B3A3D7AE21C187AC004F6A4A /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -166,14 +163,6 @@
 			path = "AI Single Player";
 			sourceTree = "<group>";
 		};
-		B3A3D7AE21C187AC004F6A4A /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				93282F3721C18616003A1826 /* Easy.swift */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -249,7 +238,6 @@
 				11E9720A209A355F006E3D26 /* Utilities.swift in Sources */,
 				B35FBDA221BDEB8B0017AB82 /* GameLocalMultiplayer.swift in Sources */,
 				B35FBDA321BDEB8B0017AB82 /* Cell.swift in Sources */,
-				93282F3821C18617003A1826 /* Easy.swift in Sources */,
 				B306A2CF21C16ED800D5B2C2 /* GameLocalMultiplayer+ARSessionManagement.swift in Sources */,
 				B3233E5D21C1852E00AD5BCD /* GameAI.swift in Sources */,
 				111DC86920ACAB690037F7B1 /* RoundedButton.swift in Sources */,
