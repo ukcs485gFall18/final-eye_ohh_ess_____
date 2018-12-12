@@ -16,10 +16,11 @@
 		638A9CF31FBA0605001D52ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 638A9CF11FBA0605001D52ED /* Main.storyboard */; };
 		638A9CF51FBA0605001D52ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 638A9CF41FBA0605001D52ED /* Assets.xcassets */; };
 		638A9CF81FBA0605001D52ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 638A9CF61FBA0605001D52ED /* LaunchScreen.storyboard */; };
+		9370089821C0C5100022AADB /* Medium.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9370089721C0C5100022AADB /* Medium.swift */; };
 		B33881AC21AF90E500D7AE7D /* cell-empty.dae in Resources */ = {isa = PBXBuildFile; fileRef = B33881AB21AF90E500D7AE7D /* cell-empty.dae */; };
 		B33B802221B0D55C008D5F81 /* cell-sphere-lighter.dae in Resources */ = {isa = PBXBuildFile; fileRef = B33B802121B0D55C008D5F81 /* cell-sphere-lighter.dae */; };
 		B33B802421B121A6008D5F81 /* GameLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33B802321B121A6008D5F81 /* GameLocal.swift */; };
-		B34CF21F21881650009386A8 /* EasyAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34CF21E21881650009386A8 /* EasyAI.swift */; };
+		B34CF21F21881650009386A8 /* Easy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34CF21E21881650009386A8 /* Easy.swift */; };
 		B3ED797821B0C95F00B822EF /* cell-cross.dae in Resources */ = {isa = PBXBuildFile; fileRef = B3ED797721B0C95F00B822EF /* cell-cross.dae */; };
 		B3ED797A21B0CA1D00B822EF /* cell-sphere.dae in Resources */ = {isa = PBXBuildFile; fileRef = B3ED797921B0CA1D00B822EF /* cell-sphere.dae */; };
 /* End PBXBuildFile section */
@@ -36,10 +37,11 @@
 		638A9CF41FBA0605001D52ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		638A9CF71FBA0605001D52ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		638A9CF91FBA0605001D52ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9370089721C0C5100022AADB /* Medium.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Medium.swift; sourceTree = "<group>"; };
 		B33881AB21AF90E500D7AE7D /* cell-empty.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "cell-empty.dae"; sourceTree = "<group>"; };
 		B33B802121B0D55C008D5F81 /* cell-sphere-lighter.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "cell-sphere-lighter.dae"; sourceTree = "<group>"; };
 		B33B802321B121A6008D5F81 /* GameLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLocal.swift; sourceTree = "<group>"; };
-		B34CF21E21881650009386A8 /* EasyAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyAI.swift; sourceTree = "<group>"; };
+		B34CF21E21881650009386A8 /* Easy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Easy.swift; sourceTree = "<group>"; };
 		B3ED797721B0C95F00B822EF /* cell-cross.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "cell-cross.dae"; sourceTree = "<group>"; };
 		B3ED797921B0CA1D00B822EF /* cell-sphere.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = "cell-sphere.dae"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,7 +83,7 @@
 				618DDF012187975200CFE2B8 /* Cube.swift */,
 				618DDF002187975200CFE2B8 /* Cell.swift */,
 				618DDEFF2187975200CFE2B8 /* CheckWinner.swift */,
-				B34CF21E21881650009386A8 /* EasyAI.swift */,
+				9370089621C0C4FC0022AADB /* AI */,
 				638A9CF11FBA0605001D52ED /* Main.storyboard */,
 				638A9CF41FBA0605001D52ED /* Assets.xcassets */,
 				638A9CF61FBA0605001D52ED /* LaunchScreen.storyboard */,
@@ -100,6 +102,15 @@
 				B33881AB21AF90E500D7AE7D /* cell-empty.dae */,
 			);
 			path = "3D Objects";
+			sourceTree = "<group>";
+		};
+		9370089621C0C4FC0022AADB /* AI */ = {
+			isa = PBXGroup;
+			children = (
+				B34CF21E21881650009386A8 /* Easy.swift */,
+				9370089721C0C5100022AADB /* Medium.swift */,
+			);
+			path = AI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,10 +190,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9370089821C0C5100022AADB /* Medium.swift in Sources */,
 				618DDF022187975200CFE2B8 /* CheckWinner.swift in Sources */,
 				618DDF042187975200CFE2B8 /* Cube.swift in Sources */,
 				618DDF032187975200CFE2B8 /* Cell.swift in Sources */,
-				B34CF21F21881650009386A8 /* EasyAI.swift in Sources */,
+				B34CF21F21881650009386A8 /* Easy.swift in Sources */,
 				B33B802421B121A6008D5F81 /* GameLocal.swift in Sources */,
 				638A9CF01FBA0605001D52ED /* ViewController.swift in Sources */,
 				638A9CEE1FBA0605001D52ED /* AppDelegate.swift in Sources */,
@@ -327,11 +339,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 74R9B42L62;
+				DEVELOPMENT_TEAM = 4C626469YQ;
 				INFOPLIST_FILE = ARKitHorizontalPlaneDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ARtest2.ARKitHorizontalPlaneDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ARtest.ARKitHorizontalPlaneDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -343,11 +355,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 74R9B42L62;
+				DEVELOPMENT_TEAM = 4C626469YQ;
 				INFOPLIST_FILE = ARKitHorizontalPlaneDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ARtest2.ARKitHorizontalPlaneDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ARtest.ARKitHorizontalPlaneDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

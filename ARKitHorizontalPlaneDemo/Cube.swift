@@ -24,6 +24,7 @@ class Cube {
     var lastPlaced = SCNNode()
     var original: SCNNode!
     var cube = [[[Cell]]]()
+    let dimension = 4
     
     init(sceneView: ARSCNView) {
         self.sceneView = sceneView
@@ -39,11 +40,11 @@ class Cube {
         self.previewBox = boxNode
         
         // fill cells in Cube 3D array
-        for i in 0...2 {
+        for i in 0...dimension-1 {
             var layerZ = [[Cell]]()
-            for j in 0...2 {
+            for j in 0...dimension-1 {
                 var layerX = [Cell]()
-                for k in 0...2 {
+                for k in 0...dimension-1 {
                     
                     let cell = Cell(i: i, j: j, k: k, state: Cell.cellState.empty)
                     cell.setPosition(pos: SCNVector3(x: 0, y: 0, z: 0))
@@ -74,19 +75,19 @@ class Cube {
         var yval = translation.y
         var zval = translation.z + 0.2
         
-        for i in 0...2 {
-            for j in 0...2 {
-                for k in 0...2 {
+        for i in 0...dimension-1 {
+            for j in 0...dimension-1 {
+                for k in 0...dimension-1 {
                     let cell = cube[i][j][k]
                     cell.setPosition(pos: SCNVector3(x: xval, y: yval, z: zval))
                     sceneView.scene.rootNode.addChildNode(cell.cellNode)
                     
                     xval += 0.2
                 }
-                xval -= 0.6
+                xval -= 0.2 * Float(dimension)
                 zval -= 0.2
             }
-            zval += 0.6
+            zval += 0.2 * Float(dimension)
             yval += 0.2
         }
     }
@@ -163,4 +164,7 @@ class Cube {
         return node
     }
     
+    func getDimension() -> Int {
+        return dimension
+    }
 }

@@ -19,11 +19,11 @@ class Cell {
     }
     
     struct Index {
-        var i, j, k: Int?      // stores the location of the cell
+        var i, j, k: Int      // stores the location of the cell
     }
     
     var cellNode: SCNNode!
-    var index = Index()
+    var index = Index(i: -1, j: -1, k: -1)
     var cellName: String!
     var state: cellState?  // is reset for generator and solver
     

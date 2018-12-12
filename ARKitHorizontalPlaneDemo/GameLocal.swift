@@ -18,7 +18,7 @@ class GameLocal {
     var cube: Cube!
     var availablePositions: [String] = []
     
-    var ai: EasyAI!
+    var ai: MediumAI!
     
     var prevLocation = CGPoint(x: 0, y: 0)
     var cubePlaced: Bool = false
@@ -36,12 +36,13 @@ class GameLocal {
         self.cube = Cube(sceneView: sceneView)
         createAvailablePositions()
         
+        ai = MediumAI(availablePos: availablePositions, cube: cube.cube)
     }
     
     private func createAvailablePositions(){
-        for i in 0...2 {
-            for j in 0...2 {
-                for k in 0...2 {
+        for i in 0...self.cube.getDimension()-1 {
+            for j in 0...self.cube.getDimension()-1 {
+                for k in 0...self.cube.getDimension()-1 {
                     self.availablePositions.append(String(i) + String(j) + String(k))
                 }
             }
@@ -79,12 +80,12 @@ class GameLocal {
             let userMove = cube.placeCell(node: tappedNode, isUser: true)
             removeValidMove(cellIndex: userMove)
             
-            //                let aiMove = ai.getMove(availablePositions: availablePositions)
-            let aiMove = availablePositions.randomElement()!
+            let aiMove = ai.getMove(availablePos: availablePositions, cubeState: cube.cube)
+            //let aiMove = availablePositions.randomElement()!
             removeValidMove(cellIndex: aiMove)
             
-            print("User played" + userMove)
-            print("AI played" + aiMove)
+//            print("User played" + userMove)
+//            print("AI played" + aiMove)
             
             sceneView.scene.rootNode.enumerateChildNodes { (nodeToReplace, stop) in
                 if nodeToReplace.name == aiMove {
