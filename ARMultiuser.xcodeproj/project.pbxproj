@@ -19,6 +19,7 @@
 		B306A2CF21C16ED800D5B2C2 /* GameLocalMultiplayer+ARSessionManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306A2CE21C16ED800D5B2C2 /* GameLocalMultiplayer+ARSessionManagement.swift */; };
 		B3233E5421C1821C00AD5BCD /* Medium.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3233E5321C1821C00AD5BCD /* Medium.swift */; };
 		B3233E5621C182A100AD5BCD /* CheckWinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3233E5521C182A100AD5BCD /* CheckWinner.swift */; };
+		B3233E5D21C1852E00AD5BCD /* GameAI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3233E5C21C1852E00AD5BCD /* GameAI.swift */; };
 		B35FBDA221BDEB8B0017AB82 /* GameLocalMultiplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35FBD9F21BDEB8A0017AB82 /* GameLocalMultiplayer.swift */; };
 		B35FBDA321BDEB8B0017AB82 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35FBDA021BDEB8B0017AB82 /* Cell.swift */; };
 		B35FBDA421BDEB8B0017AB82 /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35FBDA121BDEB8B0017AB82 /* Cube.swift */; };
@@ -42,6 +43,7 @@
 		B306A2CE21C16ED800D5B2C2 /* GameLocalMultiplayer+ARSessionManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameLocalMultiplayer+ARSessionManagement.swift"; sourceTree = "<group>"; };
 		B3233E5321C1821C00AD5BCD /* Medium.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Medium.swift; sourceTree = "<group>"; };
 		B3233E5521C182A100AD5BCD /* CheckWinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckWinner.swift; sourceTree = "<group>"; };
+		B3233E5C21C1852E00AD5BCD /* GameAI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAI.swift; sourceTree = "<group>"; };
 		B35FBD9F21BDEB8A0017AB82 /* GameLocalMultiplayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameLocalMultiplayer.swift; sourceTree = "<group>"; };
 		B35FBDA021BDEB8B0017AB82 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		B35FBDA121BDEB8B0017AB82 /* Cube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
@@ -97,17 +99,11 @@
 			isa = PBXGroup;
 			children = (
 				842316DF1F2030C300D189D1 /* AppDelegate.swift */,
-				842316E31F2030C300D189D1 /* ViewController.swift */,
-				B35FBDA521BDF0C80017AB82 /* ViewController+ARSCNViewDelegate.swift */,
-				11C983EB20953B7900394C67 /* MultipeerSession.swift */,
-				B35FBD9F21BDEB8A0017AB82 /* GameLocalMultiplayer.swift */,
-				B306A2CE21C16ED800D5B2C2 /* GameLocalMultiplayer+ARSessionManagement.swift */,
-				B35FBDA121BDEB8B0017AB82 /* Cube.swift */,
-				B35FBDA021BDEB8B0017AB82 /* Cell.swift */,
-				111DC86820ACAB690037F7B1 /* RoundedButton.swift */,
-				11E97209209A355F006E3D26 /* Utilities.swift */,
-				B3233E5321C1821C00AD5BCD /* Medium.swift */,
-				B3233E5521C182A100AD5BCD /* CheckWinner.swift */,
+				B3233E5721C1842800AD5BCD /* Main Game Screen */,
+				B3233E5821C1844B00AD5BCD /* Local Networking */,
+				B3233E5921C1848A00AD5BCD /* Interactions */,
+				B3233E5A21C184D800AD5BCD /* Utilities */,
+				B3233E5B21C184E600AD5BCD /* AI Single Player */,
 				842316E51F2030C300D189D1 /* Main.storyboard */,
 				842316EA1F2030C300D189D1 /* LaunchScreen.storyboard */,
 				842316ED1F2030C300D189D1 /* Info.plist */,
@@ -115,6 +111,53 @@
 				112FE5661F4F95A200BF85EA /* Assets.xcassets */,
 			);
 			path = ARMultiuser;
+			sourceTree = "<group>";
+		};
+		B3233E5721C1842800AD5BCD /* Main Game Screen */ = {
+			isa = PBXGroup;
+			children = (
+				842316E31F2030C300D189D1 /* ViewController.swift */,
+				B35FBDA521BDF0C80017AB82 /* ViewController+ARSCNViewDelegate.swift */,
+			);
+			path = "Main Game Screen";
+			sourceTree = "<group>";
+		};
+		B3233E5821C1844B00AD5BCD /* Local Networking */ = {
+			isa = PBXGroup;
+			children = (
+				11C983EB20953B7900394C67 /* MultipeerSession.swift */,
+				B35FBD9F21BDEB8A0017AB82 /* GameLocalMultiplayer.swift */,
+				B306A2CE21C16ED800D5B2C2 /* GameLocalMultiplayer+ARSessionManagement.swift */,
+			);
+			path = "Local Networking";
+			sourceTree = "<group>";
+		};
+		B3233E5921C1848A00AD5BCD /* Interactions */ = {
+			isa = PBXGroup;
+			children = (
+				B35FBDA121BDEB8B0017AB82 /* Cube.swift */,
+				B35FBDA021BDEB8B0017AB82 /* Cell.swift */,
+				B3233E5521C182A100AD5BCD /* CheckWinner.swift */,
+			);
+			path = Interactions;
+			sourceTree = "<group>";
+		};
+		B3233E5A21C184D800AD5BCD /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				11E97209209A355F006E3D26 /* Utilities.swift */,
+				111DC86820ACAB690037F7B1 /* RoundedButton.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		B3233E5B21C184E600AD5BCD /* AI Single Player */ = {
+			isa = PBXGroup;
+			children = (
+				B3233E5C21C1852E00AD5BCD /* GameAI.swift */,
+				B3233E5321C1821C00AD5BCD /* Medium.swift */,
+			);
+			path = "AI Single Player";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +236,7 @@
 				B35FBDA221BDEB8B0017AB82 /* GameLocalMultiplayer.swift in Sources */,
 				B35FBDA321BDEB8B0017AB82 /* Cell.swift in Sources */,
 				B306A2CF21C16ED800D5B2C2 /* GameLocalMultiplayer+ARSessionManagement.swift in Sources */,
+				B3233E5D21C1852E00AD5BCD /* GameAI.swift in Sources */,
 				111DC86920ACAB690037F7B1 /* RoundedButton.swift in Sources */,
 				B35FBDA421BDEB8B0017AB82 /* Cube.swift in Sources */,
 				11C983EC20953B7900394C67 /* MultipeerSession.swift in Sources */,
