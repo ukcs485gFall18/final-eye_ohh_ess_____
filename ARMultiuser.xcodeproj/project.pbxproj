@@ -25,6 +25,7 @@
 		B35FBDA321BDEB8B0017AB82 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35FBDA021BDEB8B0017AB82 /* Cell.swift */; };
 		B35FBDA421BDEB8B0017AB82 /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35FBDA121BDEB8B0017AB82 /* Cube.swift */; };
 		B35FBDA621BDF0C80017AB82 /* ViewController+ARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35FBDA521BDF0C80017AB82 /* ViewController+ARSCNViewDelegate.swift */; };
+		B3A3D7B021C1886B004F6A4A /* Easy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A3D7AF21C1886B004F6A4A /* Easy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		B35FBDA021BDEB8B0017AB82 /* Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		B35FBDA121BDEB8B0017AB82 /* Cube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
 		B35FBDA521BDF0C80017AB82 /* ViewController+ARSCNViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+ARSCNViewDelegate.swift"; sourceTree = "<group>"; };
+		B3A3D7AF21C1886B004F6A4A /* Easy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Easy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				842316DD1F2030C300D189D1 /* Products */,
 				75CD4F3075CDAC3000000001 /* Configuration */,
 				75CF3F3075CF41B000000001 /* LICENSE */,
+				B3A3D7AE21C187AC004F6A4A /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,8 +109,8 @@
 				B3233E5921C1848A00AD5BCD /* Interactions */,
 				B3233E5A21C184D800AD5BCD /* Utilities */,
 				B3233E5B21C184E600AD5BCD /* AI Single Player */,
-				842316E51F2030C300D189D1 /* Main.storyboard */,
 				842316EA1F2030C300D189D1 /* LaunchScreen.storyboard */,
+				842316E51F2030C300D189D1 /* Main.storyboard */,
 				842316ED1F2030C300D189D1 /* Info.plist */,
 				84ABEA091F3D15E70052D547 /* Assets.scnassets */,
 				112FE5661F4F95A200BF85EA /* Assets.xcassets */,
@@ -156,20 +159,19 @@
 		B3233E5B21C184E600AD5BCD /* AI Single Player */ = {
 			isa = PBXGroup;
 			children = (
+				B3A3D7AF21C1886B004F6A4A /* Easy.swift */,
 				B3233E5C21C1852E00AD5BCD /* GameAI.swift */,
 				B3233E5321C1821C00AD5BCD /* Medium.swift */,
-
 			);
 			path = "AI Single Player";
 			sourceTree = "<group>";
 		};
-		93282F3A21C1862C003A1826 /* AI */ = {
+		B3A3D7AE21C187AC004F6A4A /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
 				93282F3721C18616003A1826 /* Easy.swift */,
-				B3233E5321C1821C00AD5BCD /* Medium.swift */,
 			);
-			path = AI;
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,6 +257,7 @@
 				11C983EC20953B7900394C67 /* MultipeerSession.swift in Sources */,
 				B35FBDA621BDF0C80017AB82 /* ViewController+ARSCNViewDelegate.swift in Sources */,
 				B3233E5421C1821C00AD5BCD /* Medium.swift in Sources */,
+				B3A3D7B021C1886B004F6A4A /* Easy.swift in Sources */,
 				B3233E5621C182A100AD5BCD /* CheckWinner.swift in Sources */,
 				842316E41F2030C300D189D1 /* ViewController.swift in Sources */,
 				842316E01F2030C300D189D1 /* AppDelegate.swift in Sources */,
